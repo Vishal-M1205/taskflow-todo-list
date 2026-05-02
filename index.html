@@ -9,24 +9,24 @@
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top top-0">
         <div class="container">
           <a href="#" class="navbar-brand fs-4 fw-bold"><i class="bi bi-check-circle-fill text-primary pe-1"></i>Taskflow</a>
  <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
     <span class="navbar-toggler-icon"></span>
  </button>
-   <div class="navbar-collapse collapse" id="navbarNav">
+   <div class="navbar-collapse collapse " id="navbarNav">
      <ul class="navbar-nav ms-auto "> 
-       <li class="nav-item pe-3">
-        <a href="" class="nav-link">Features</a>
+       <li class="nav-item pe-3 pt-3 pt-lg-0">
+        <a href="#feature-section" class="nav-link">Features</a>
        </li>
-       <li class="nav-item pe-3">
+       <li class="nav-item pe-3 pt-3 pt-lg-0">
         <a href="" class="nav-link"><i class="bi bi-moon-fill fs-4"></i></a>
        </li>
-       <li class="nav-item pe-3">
-        <button class="btn btn-outline-primary  px-4 fw-bold" id="login">Login</button>
+       <li class="nav-item pe-3 pt-3 pt-lg-0">
+        <button class="btn btn-outline-primary  px-4 fw-bold" id="login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
        </li>
-       <li class="nav-item">
+       <li class="nav-item pt-3 pt-lg-0">
         <button class="btn text-light px-4 fw-bold" id="get-start">Get Started</button>
        </li>
      </ul>
@@ -36,5 +36,111 @@
        
 
     </nav>
+    <section id="hero-section" class="container-fluid">
+        <div class="container">
+          <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6  ">
+          <h1 class="fw-bold display-3 mb-4 hero-title fadeUp">Manage Your Tasks with Elegance</h1>
+          <p class="text-muted lead mb-4 fadeUp">A premium task management experience designed for productivity. Beautiful, intuitive, and powerful.</p>
+         
+            <button class="btn text-light fs-5 fw-bold px-4 me-2 fadeUp" id="start-free">Start Free</button>
+            <button class="btn btn-outline-primary fs-5 fw-bold px-4 fadeUp">Sign In</button>
+         
+            </div>
+            <div class="col-lg-6">
+                   <div class="card shadow-lg rounded-4 card-float">
+                          <div class="card-body">
+                            <div class="d-flex gap-3 align-items-center">
+                              <i class="bi bi-check-circle-fill text-success fs-3"></i>
+                              <div>
+                                <h6 >Complete project proposal</h6>
+                                <p class="lead fs-6">Track your progress</p>
+                              </div>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                  <div class=" progress-bar progress-bar-animated progress-bar-striped bg-success" style="width: 75%;"></div>
+                            </div>
+                            
+                          </div>
+                   </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <section id="feature-section" class="py-5" >
+         <div class="container py-5 ">
+               <div class="text-center mt-5">
+                <h1 class="fw-bold ">Everything you need</h1>
+                <p class="fs-5 lead">Powerful features wrapped in simplicity</p>
+               </div>
+                    
+               <div class="row my-5 g-3">
+                <div class="col-lg-3 ">
+                  <div class="card pt-4 border-0 shadow-sm rounded-4 card-shadow">
+                    <div class="card-body ">
+                         <i class="bi bi-grid-fill bg-mediumslateblue text-light rounded-3" style="width: fit-content; padding: 10px 15px 10px 15px;"></i>
+                      <h6 class="mt-4">Clean Interface</h6>
+                      <p>Minimal, distraction-free design that keeps you focused on what matters</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 ">
+                  <div class="card pt-4 border-0 shadow-sm rounded-4 card-shadow">
+                    <div class="card-body ">
+                          <i class="bi bi-lightning-fill bg-mediumslateblue text-light rounded-3" style="width: fit-content; padding: 10px 15px 10px 15px;"></i>
+                      <h6 class="mt-4">Lightning Fast</h6>
+                      <p>Instant updates and smooth interactions for maximum productivity</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 ">
+                  <div class="card pt-4 border-0 shadow-sm rounded-4 card-shadow">
+                    <div class="card-body ">
+                         <i class="bi bi-shield-fill bg-mediumslateblue text-light rounded-3" style="width: fit-content; padding: 10px 15px 10px 15px;"></i>
+                      <h6 class="mt-4">Organized Flow</h6>
+                      <p>Filter, sort, and manage tasks with an intuitive workflow</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 ">
+                  <div class="card pt-4 border-0 shadow-sm rounded-4 card-shadow">
+                    <div class="card-body ">
+                         <i class="bi bi-pie-chart-fill  bg-mediumslateblue text-light rounded-3" style="width: fit-content; padding: 10px 15px 10px 15px;"></i>
+                      <h6 class="mt-4">Track Progress</h6>
+                      <p>Visual indicators and stats to monitor your completion rate</p>
+                    </div>
+                  </div>
+                </div>
+              
+               
+               
+               </div>
+         </div>
+    </section>
+    <footer class="bg-light fs-6  lead text-center py-3">
+               © 2026 TaskFlow. Built with passion.   
+    </footer>
+    <div class="modal fade " id="loginModal">
+    <div class="modal-dialog modal-dialog-centered "> 
+   <div class="modal-content rounded-5 shadow-lg px-5 py-4">
+         <div class="modal-header border-0 ">
+              <h5 class="modal-title ms-auto fs-2 fw-bold">Welcome back!</h5>
+              <button class="btn btn-close" data-bs-dismiss="modal"></button>
+         </div>
+         <div class="modal-body ">
+              <label for="email" class="form-label fs-5 lead">Email</label>
+              <input type="text" name="email" id="email" class="form-control " placeholder="Enter your mail id.."
+              style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
+              <label for="pass" class="form-label fs-5 lead mt-3">Password</label>
+              <input type="password" name="pass" id="pass" class="form-control " placeholder="Enter your password"
+              style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
+              
+         </div>
+         <div class="modal-footer"> 
+         <button class="btn btn-primary w-100 fs-4 fw-semibold" id="sign-in">Sign-in</button>
+         </div>
+   </div>
+    </div>
+    </div>
 </body>
 </html>

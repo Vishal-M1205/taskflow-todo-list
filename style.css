@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 :root {
     --bg-primary: #ffffff;
     --bg-secondary: #f8f9fa;
@@ -24,9 +26,71 @@
     --hero-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
-
-#get-start{
-    background: var(--primary-gradient);
-    
+body{
+    background: linear-gradient(135deg,#ffffff 30%, #cebff7 70% );
 }
 
+.fadeUp{
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1.5s ease forwards;
+}
+@keyframes fadeUp{
+    to{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+
+}
+#get-start{
+    background: var(--primary-gradient);
+   transition: all 0.4s;
+}
+
+#get-start:hover{
+    box-shadow: 2px 2px 10px #667eea;
+    transform: translateY(-10%);
+}
+#start-free{
+    background: var(--primary-gradient); 
+    transition: all 0.4s;
+}
+#start-free:hover{
+    box-shadow: 2px 2px 10px #667eea;
+    transform: translateY(-10%);
+}
+
+#sign-in{
+     background: var(--primary-gradient); 
+    transition: all 0.4s;
+}
+#sign-in:hover{
+    box-shadow: 2px 2px 10px #667eea;
+    transform: translateY(-10%);
+}
+.hero-title{
+    background: var(--primary-gradient);
+    background-clip: text;
+    color: transparent;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.card-float{
+    animation: float 3s ease-in-out infinite;
+}
+
+.bg-mediumslateblue{
+    background-color: rgba(124, 104, 238, 0.822);
+}
+
+.card-shadow{
+    transition: all 0.5s;
+}
+.card-shadow:hover{
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.353) !important;
+    transform: translateY(-10px);
+}
