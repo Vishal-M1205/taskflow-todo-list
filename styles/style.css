@@ -145,3 +145,46 @@ body{
     background-color: var(--bg-icon-button);
     color: white;
 }
+
+#addTask{
+    background: var(--primary-gradient);
+   transition: all 0.4s;
+}
+
+#addTask:hover{
+    box-shadow: 2px 2px 10px #667eea;
+    transform: translateY(-10%);
+}
+
+.active-btn{
+    background: var(--primary-gradient);
+    color: white !important;
+}
+
+.check-btn{
+    transition: all 0.4s;
+}
+.check-btn:hover{
+    
+    transform: scale(1.1);
+    background-color:rgba(65, 204, 65, 0.495) ;
+
+}
+
+.edit-btn{
+    color: rgba(124, 104, 238, 0.822) !important;
+    transition: all 0.3s;
+}
+.edit-btn:hover{
+    background-color: rgba(124, 104, 238, 0.112);
+    transform: scale(1.1);
+}
+
+.trash-btn{
+    transition: all 0.3s;
+}
+
+.trash-btn:hover{
+    background-color: rgba(255, 0, 0, 0.319);
+    transform: scale(1.1);
+}
