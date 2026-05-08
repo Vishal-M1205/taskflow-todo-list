@@ -109,7 +109,7 @@
          <button class="btn text-light fw-bold" id="addTask">Add Task +</button>
       </div>
         <div>
-          <button class="btn btn-info active-btn fw-bold">All</button>
+          <button class="btn  active-btn fw-bold">All</button>
           <button class="btn fw-bold">Pending</button>
           <button class="btn fw-bold">Completed</button>
         </div>
@@ -120,7 +120,7 @@
                   <div>
                        <h4>Brush Teeth</h4>
                        <p>going to brush teeth with sensodyne</p>
-                       <p>Pending</p>
+                       <p class="pending"><i class="bi bi-clock"></i> Pending</p>
                   </div>
                   <div>
                       <button class="btn rounded-2 text-success border-1 border-secondary-subtle py-2  fs-4 check-btn border"><i class="bi bi-check-circle  "></i></button>
@@ -130,16 +130,16 @@
             </div>
           </div>
           <div class="card rounded-4 shadow-sm">
-            <div class="card-body d-flex justify-content-between">
-                  <div>
+            <div class="card-body d-flex justify-content-between ">
+                  <div class="completed-text">
                        <h4>Brush Teeth</h4>
                        <p>going to brush teeth with sensodyne</p>
-                       <p>Pending</p>
+                       <p class="completed"><i class="bi bi-check-circle"></i> Completed</p>
                   </div>
                   <div>
-                      <button class="btn"><i class="bi bi-heart"></i></button>
-                      <button class="btn"><i class="bi bi-heart"></i></button>
-                      <button class="btn"><i class="bi bi-heart"></i></button>
+                       <button class="btn rounded-2 text-warning border-1 border-secondary-subtle py-2  fs-4 redo-btn border"><i class="bi bi-arrow-counterclockwise  "></i></button>
+                      <button class="btn fs-4 rounded-2 border-1 border-secondary-subtle py-2 border edit-btn"><i class="bi bi-pencil "></i></button>
+                      <button class="btn text-danger fs-4 rounded-2 border-1 border-secondary-subtle py-2 border trash-btn  "><i class="bi bi-trash"></i></button>
                   </div>
             </div>
           </div>

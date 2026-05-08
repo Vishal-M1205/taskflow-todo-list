@@ -188,3 +188,32 @@ body{
     background-color: rgba(255, 0, 0, 0.319);
     transform: scale(1.1);
 }
+
+.redo-btn{
+    transition: all 0.3s;
+}
+
+.redo-btn:hover{
+    background-color: rgba(255, 247, 0, 0.319);
+    transform: scale(1.1);
+}
+
+.pending{
+    background-color: rgba(232, 232, 3, 0.511);
+    color: red;
+    font-weight: bold;
+    width: fit-content;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+}
+.completed{
+    background-color: rgba(3, 232, 3, 0.511);
+    color: rgb(33, 134, 0);
+    font-weight: bold;
+    width: fit-content;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+}
+.completed-text{
+    text-decoration: line-through;
+}
