@@ -1,0 +1,53 @@
+{
+  "tasks": [
+    {
+      "title": "Brush ",
+      "description": "brush using sensodyne",
+      "priority": "High",
+      "completed": true,
+      "createdAt": 14,
+      "id": "gw1okB1m_-Y"
+    },
+    {
+      "title": "Brush ",
+      "description": "brush using sensodyne",
+      "priority": "High",
+      "completed": false,
+      "createdAt": "14/4/2026",
+      "id": "6eWApWp58sE"
+    },
+    {
+      "title": "Eat",
+      "description": "Healthy Foods",
+      "priority": "high",
+      "completed": false,
+      "createdAt": "14/4/2026",
+      "id": "yLEZId_59EU"
+    },
+    {
+      "title": "Sleep",
+      "description": "Sleep for 8 hours",
+      "priority": "high",
+      "completed": false,
+      "createdAt": "14/4/2026",
+      "id": "x59huAXEzPw"
+    },
+    {
+      "title": "Learn SQL",
+      "description": "complete all the task",
+      "priority": "high",
+      "completed": false,
+      "createdAt": "14/4/2026",
+      "id": "lk-UiZXV9t8"
+    },
+    {
+      "title": "Play Game",
+      "description": "play got",
+      "priority": "high",
+      "completed": false,
+      "createdAt": "14/4/2026",
+      "id": "yQnqz-u2XnU"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

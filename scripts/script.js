@@ -1,7 +1,7 @@
  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,4}$/;
-     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,15}$/
-     const nameRegex = /^[a-zA-Z\s]+$/
-      toastr.options = {
+const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,15}$/
+const nameRegex = /^[a-zA-Z\s]+$/
+toastr.options = {
         "positionClass": "toast-bottom-right",
         "showDuration": "300",
         "preventDuplicates": true
