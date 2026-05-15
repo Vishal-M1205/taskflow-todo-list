@@ -1,52 +1,39 @@
 {
   "tasks": [
     {
-      "title": "Brush ",
-      "description": "brush using sensodyne",
-      "priority": "High",
-      "completed": true,
-      "createdAt": 14,
-      "id": "gw1okB1m_-Y"
-    },
-    {
-      "title": "Brush ",
-      "description": "brush using sensodyne",
-      "priority": "High",
-      "completed": false,
-      "createdAt": "14/4/2026",
-      "id": "6eWApWp58sE"
-    },
-    {
       "title": "Eat",
-      "description": "Healthy Foods",
+      "description": "Eat Healthy Foods",
       "priority": "high",
-      "completed": false,
-      "createdAt": "14/4/2026",
-      "id": "yLEZId_59EU"
+      "completed": true,
+      "createdAt": "15/4/2026",
+      "id": "VbRe62ojshE"
     },
     {
       "title": "Sleep",
-      "description": "Sleep for 8 hours",
+      "description": "sleep for 8 hours",
       "priority": "high",
-      "completed": false,
-      "createdAt": "14/4/2026",
-      "id": "x59huAXEzPw"
+      "completed": true,
+      "createdAt": "15/4/2026",
+      "id": "_I8FicHwwmM"
     },
     {
       "title": "Learn SQL",
-      "description": "complete all the task",
+      "description": "Complete all the task",
       "priority": "high",
-      "completed": false,
-      "createdAt": "14/4/2026",
-      "id": "lk-UiZXV9t8"
-    },
+      "completed": true,
+      "createdAt": "15/4/2026",
+      "id": "IGdpn138NkI"
+    }
+  ],
+  "users": [
     {
-      "title": "Play Game",
-      "description": "play got",
-      "priority": "high",
-      "completed": false,
-      "createdAt": "14/4/2026",
-      "id": "yQnqz-u2XnU"
+      "name": "Vishal Manivannan",
+      "email": "visowmani.123@gmail.com",
+      "password": "Vishal@1205",
+      "dob": "2005-11-12",
+      "gender": "male",
+      "address": "2/201 B\nAnnapoorani Nagar, Theethi Palayam",
+      "id": "P72OEYvOBzE"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

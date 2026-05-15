@@ -1,4 +1,6 @@
- const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,4}$/;
+const API = 'http://localhost:5000'
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,4}$/;
 const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,15}$/
 const nameRegex = /^[a-zA-Z\s]+$/
 toastr.options = {
@@ -38,7 +40,7 @@ toastr.options = {
             }, 1500);
          }
       })
-        $('#register').on('click',function(){
+        $('#register').on('click', async function(){
           console.log()
           let isValid = true;
          if(!nameValidate($('#name').val())){
@@ -66,7 +68,7 @@ toastr.options = {
           toastr.warning("Fill the date of birth");
           return
          }
-         if($('#male').prop('checked')&&$('#female').prop('checked')){
+         if(!$('#male').prop('checked')&&!$('#female').prop('checked')){
           isValid = false;
           toastr.warning("Fill the gender");
           return
@@ -78,11 +80,38 @@ toastr.options = {
          }
          
          if(isValid){
-              toastr.success("Login success")
-               setTimeout(() => {
-              window.location.assign('./main.html');
-            $('#loginEmail').val("")
-           $('#loginPass').val("")
-            }, 1500);
+              try {
+              const response = await fetch(`${API}/users`,{
+                method:'POST',
+                headers:{
+                  'Content-type':'application/json'
+                },
+                body:JSON.stringify({
+                  name: $('#name').val(),
+                  email : $('#email').val(),
+                  password: $('#pass').val(),
+                  dob:$('#dob').val(),
+                  gender: $('#male').prop('checked')?'male':'female',
+                  address: $('#addr').val()
+                })
+              })
+              toastr.success("User Registered Successfully")
+              const modal = bootstrap.Modal.getInstance(
+              document.getElementById('registerModal')
+                );
+
+              modal.hide();
+              $('#name').val("");
+              $('#email').val("");
+              $('#pass').val("");
+              $('#cpass').val("");
+              $('#dob').val("");
+              $('#male').prop('checked',false);
+              $('#female').prop('checked',false);
+              $('#addr').val("");
+              } catch (error) {
+                console.log(error)
+              }
+           
          }
       })

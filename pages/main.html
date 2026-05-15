@@ -47,7 +47,7 @@
                         <div class="d-flex justify-content-between align-items-center ">
                              <div>
                                  <p class="textt-muted fs-6 mb-1">Total Tasks</p>
-                                 <p class="fw-bold fs-1">3</p>
+                                 <p class="fw-bold fs-1" id="totalTaskCard"></p>
                            </div>
                             <div>
                                   <i class="bi bi-check-circle fs-3  px-3 py-2 rounded-4 " style="background-color: rgba(124, 104, 238, 0.232); color: rgb(100, 63, 160);"></i>  
@@ -66,14 +66,14 @@
                         <div class="d-flex justify-content-between align-items-center ">
                              <div>
                                  <p class="textt-muted fs-6 mb-1">Completed</p>
-                                 <p class="fw-bold fs-1">1</p>
+                                 <p class="fw-bold fs-1" id="completeTaskCard"></p>
                            </div>
                             <div>
                                   <i class="bi bi-check fs-3  px-3 py-2 rounded-4 text-success bg-success-subtle " "></i>  
                            </div>
                         </div>
                           <div class="progress" style="height: 8px;">
-                               <div class="progress-bar bg-success" style="width: 33%;"></div>
+                               <div class="progress-bar bg-success"  id="completeProgBar"></div>
                           </div>
                           
                       </div>
@@ -85,14 +85,14 @@
                         <div class="d-flex justify-content-between align-items-center ">
                              <div>
                                  <p class="textt-muted fs-6 mb-1">Pending</p>
-                                 <p class="fw-bold fs-1">2</p>
+                                 <p class="fw-bold fs-1" id="pendingTaskCard"></p>
                            </div>
                             <div>
                                   <i class="bi bi-clock fs-3  px-3 py-2 rounded-4 text-warning bg-warning-subtle " "></i>  
                            </div>
                         </div>
                           <div class="progress" style="height: 8px;">
-                               <div class="progress-bar bg-warning" style="width: 67%;"></div>
+                               <div class="progress-bar bg-warning" id="pendingProgBar"></div>
                           </div>
                           
                       </div>
@@ -136,6 +136,30 @@
           <button class="btn fw-bold" id="pendTaskTab">Pending</button>
           <button class="btn fw-bold" id="completeTaskTab">Completed</button>
         </div>
+         <div class="modal fade" id="editTaskModal">
+              <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-content">
+                  <div class="modal-header border-0">
+                       <h4 class="modal-title ms-auto">Update Task</h4>
+                       <button class="btn btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body">
+                       <label for="updatetaskTitle" class="form-label">Title</label>
+                       <input type="text" name="updatetaskTitle" id="updatetaskTitle" class="form-control">
+                       <label for="addTaskDesc">Description</label>
+                       <textarea class="form-control" name="updateTaskDesc" id="updateTaskDesc"></textarea>
+                       <label for="updateTaskPrior">Set Priority</label>
+                       <select class="form-select" name="updateTaskPrior" id="updateTaskPrior">
+                        <option value="high">High Priority</option>
+                        <option value="low">Low Priority</option>
+                       </select>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="updateTaskBtn">Update Task</button>
+
+                  </div>
+               </div>
+              </div>
+         </div>
+       
         <div id="taskList" class="container d-flex flex-column gap-3">
         
           
