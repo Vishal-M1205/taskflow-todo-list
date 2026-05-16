@@ -30,7 +30,7 @@
         <button class="btn fw-bold violet-button rounded-pill" id="user"><i class="bi bi-person-fill fs-4  "></i> User</button>
        </li>
        <li class="nav-item pt-3 pt-lg-0">
-        <button class="btn fw-bold violet-button rounded-pill ms-lg-3" id="user"><i class="bi bi-door-open fs-4  "></i> Logout</button>
+        <button class="btn fw-bold violet-button rounded-pill ms-lg-3" id="logoutBtn"><i class="bi bi-door-open fs-4  "></i> Logout</button>
        </li>
      </ul>
    </div>
@@ -106,7 +106,23 @@
 
       <div class="d-flex justify-content-between">
          <h3 class="fw-bold">My Tasks</h3>
-         <button class="btn text-light fw-bold" id="addTask" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task +</button>
+         <div>
+                 <button class="btn  violet-button fw-bold" id="restoreTask" data-bs-toggle="modal" data-bs-target="#restoreTaskModal">Restore Task</button>
+                  <button class="btn text-light fw-bold" id="addTask" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task +</button>
+         </div>
+         <div class="modal fade" id="restoreTaskModal">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header border-0">
+                       <h4 class="modal-title ms-auto">Restore Task</h4>
+                       <button class="btn btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body" id="restoreTaskList">
+                       
+                  </div>
+                </div>
+              </div>
+         </div>
          <div class="modal fade" id="addTaskModal">
               <div class="modal-dialog modal-dialog-centered">
                <div class="modal-content">
@@ -124,8 +140,11 @@
                         <option value="high">High Priority</option>
                         <option value="low">Low Priority</option>
                        </select>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="addTaskBtn">Add Task</button>
-
+                       <label for="addTaskDueDate">Due date</label>
+                       <input type="date" name="addTaskDueDate" id="addTaskDueDate">
+                  </div>
+                  <div class="modal-footer">
+                       <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="addTaskBtn">Add Task</button>
                   </div>
                </div>
               </div>

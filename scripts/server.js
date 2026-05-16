@@ -2,7 +2,7 @@ const API = 'http://localhost:5000'
 
 const date = new Date();
 
-let curID = 'qpZn7tS_ewA';
+const userId = localStorage.getItem('userId')
 
 const taskList = document.getElementById('taskList')
 
@@ -21,6 +21,7 @@ async function addTask(){
         const title = $('#addtaskTitle').val();
         const desc = $('#addTaskDesc').val();
         const priority = $('#addTaskPrior').val();
+        const dueDate = $('#addTaskDueDate').val();
         const response = await fetch(`${API}/tasks`,{
         method:'POST',
         headers:{
@@ -31,7 +32,10 @@ async function addTask(){
             description:desc,
             priority: priority,
             completed:false,
-            createdAt : `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+            createdAt : `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
+            dueDate : dueDate,
+            userId : userId,
+            deleted:false
         })
     })
     console.log('Data added');
@@ -45,7 +49,8 @@ async function addTask(){
 
 async function getAllTask() {
     try {
-    const response = await fetch(`${API}/tasks`) 
+    console.log(userId)
+    const response = await fetch(`${API}/tasks?userId=${userId}&deleted=false`) 
     const data = await response.json()
     console.log(data)
     taskList.replaceChildren();
@@ -98,7 +103,7 @@ async function getPendorCompleteTask(val){
             pendingTaskTab = true;
             allTaskTab = false;
         }
-    const response = await fetch(`${API}/tasks?completed=${val}`) 
+    const response = await fetch(`${API}/tasks?completed=${val}&userId=${userId}&deleted=false`) 
     const data = await response.json()
     console.log(data)
     taskList.replaceChildren();
@@ -139,17 +144,17 @@ async function getPendorCompleteTask(val){
 
 async function getTaskCount() {
     try {
-    const allTaskResponse = await fetch(`${API}/tasks`) 
+    const allTaskResponse = await fetch(`${API}/tasks?userId=${userId}&deleted=false`) 
     const allTaskData = await allTaskResponse.json()
     $('#totalTaskCard').text(allTaskData.length)
 
-    const completedTaskResponse = await fetch(`${API}/tasks?completed=true`)
+    const completedTaskResponse = await fetch(`${API}/tasks?completed=true&userId=${userId}&deleted=false`)
     const completedTaskData = await completedTaskResponse.json()
     $('#completeTaskCard').text(completedTaskData.length);
     const completePercent = (completedTaskData.length/allTaskData.length)*100
     $('#completeProgBar').css('width',`${completePercent}%`)
     
-    const pendingTaskResponse = await fetch(`${API}/tasks?completed=false`)
+    const pendingTaskResponse = await fetch(`${API}/tasks?completed=false&userId=${userId}&deleted=false`)
     const pendingTaskData = await pendingTaskResponse.json()
     $('#pendingTaskCard').text(pendingTaskData.length);
     const pendingPercent = (pendingTaskData.length/allTaskData.length)*100
@@ -255,7 +260,13 @@ async function updateTask(id){
 async function deleteTask(id){
     try {
          const response = await fetch(`${API}/tasks/${id}`,{
-        method:"DELETE"
+        method:"PATCH",
+        headers:{
+            'Content-type':'application/json'
+        },
+        body:JSON.stringify({
+            deleted:true
+        })
     })
     console.log(response)
     getTaskCount();
@@ -305,7 +316,71 @@ $('#completeTaskTab').on('click',()=>{
     getPendorCompleteTask(true);
 })
 
+$('#logoutBtn').on('click',()=>{
+    localStorage.clear();
+    setTimeout(()=>{
+  window.location.replace('./index.html')
+    },1500)
+})
 
+$('#restoreTask').on('click',()=>{
+    restoreTaskListModal()
+})
+
+async function restoreTaskListModal() {
+    try {
+        const response = await fetch(`${API}/tasks?userId=${userId}&deleted=true`)
+     const data = await response.json();
+     const restoreTaskList = document.getElementById('restoreTaskList');
+     restoreTaskList.replaceChildren();
+     data.forEach((task)=>{
+           const div = document.createElement('div');
+           div.innerHTML = `
+           <div class="coontainer d-flex justify-content-between rounded-3 shadow-lg px-3 py-2 align-items-center">
+           <div>
+           <p class="fs-4 mb-0">${task.title}</p>
+           </div>
+           <div>
+           <button class="btn border-1 border-warning text-warning" ><i class="bi bi-bootstrap-reboot fs-4" onClick="restoreTask('${task.id}')"></i></button>
+           </div> 
+           </div>
+           
+           `
+           restoreTaskList.append(div)
+     })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function restoreTask(id) {
+    try {
+        const response = await fetch(`${API}/tasks/${id}`, {
+        method:"PATCH",
+        headers:{
+            'Content-type':'application/json'
+        },
+        body: JSON.stringify({
+            deleted:false
+        })
+    })
+    restoreTaskListModal();
+    getTaskCount();
+     if(allTaskTab){
+        getAllTask()
+     }
+     else if(completedTaskTab){
+        getPendorCompleteTask(true)
+     }
+     else{
+        getPendorCompleteTask(false)
+     }
+    } catch (error) {
+        console.log(error)
+    }
+
+    
+}
 
 getTaskCount();
 getAllTask();

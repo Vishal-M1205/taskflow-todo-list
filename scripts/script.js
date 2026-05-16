@@ -18,7 +18,7 @@ toastr.options = {
  const nameValidate = function (input){
   return nameRegex.test(input)
  }
-      $('#sign-in').on('click',function(){
+ $('#sign-in').on('click',async function(){
         let isValid = true;
 
          if(!emailValidate($('#loginEmail').val())){
@@ -32,12 +32,22 @@ toastr.options = {
           return
          }
          if(isValid){
-                toastr.success("Login success")
-               setTimeout(() => {
-              window.location.assign('./main.html');
-            $('#loginEmail').val("")
-           $('#loginPass').val("")
-            }, 1500);
+                const response = await fetch(`${API}/users?email=${$('#loginEmail').val()}&password=${$('#loginPass').val()}`)
+                const data = await response.json();
+               if(data[0]?.email){
+                    toastr.success('Login Successful') 
+                    localStorage.setItem('userId',`${data[0].id}`)
+                    console.log(localStorage.getItem('userId'))
+                    setTimeout(()=>{
+                      window.location.replace('./main.html')
+                    },1500)
+                    
+                }
+                else{
+                  toastr.error('Invalid Email or Password')
+                }
+
+                
          }
       })
         $('#register').on('click', async function(){
@@ -81,7 +91,14 @@ toastr.options = {
          
          if(isValid){
               try {
-              const response = await fetch(`${API}/users`,{
+                
+                const emailCheckResponse = await fetch(`${API}/users?email=${$('#email').val()}`)
+                const emailData = await emailCheckResponse.json()
+                if(emailData[0]?.email){
+                  toastr.error('User already exist')
+                }
+                else{
+                  const response = await fetch(`${API}/users`,{
                 method:'POST',
                 headers:{
                   'Content-type':'application/json'
@@ -95,6 +112,7 @@ toastr.options = {
                   address: $('#addr').val()
                 })
               })
+           
               toastr.success("User Registered Successfully")
               const modal = bootstrap.Modal.getInstance(
               document.getElementById('registerModal')
@@ -109,9 +127,12 @@ toastr.options = {
               $('#male').prop('checked',false);
               $('#female').prop('checked',false);
               $('#addr').val("");
+                }
               } catch (error) {
                 console.log(error)
               }
            
          }
       })
+
+        

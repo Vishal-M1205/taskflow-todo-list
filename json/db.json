@@ -2,27 +2,25 @@
   "tasks": [
     {
       "title": "Eat",
-      "description": "Eat Healthy Foods",
+      "description": "Eat healthy",
       "priority": "high",
-      "completed": true,
-      "createdAt": "15/4/2026",
-      "id": "VbRe62ojshE"
+      "completed": false,
+      "createdAt": "16/4/2026",
+      "dueDate": "2026-05-23",
+      "userId": "P72OEYvOBzE",
+      "deleted": false,
+      "id": "dd1I2oRsHPg"
     },
     {
-      "title": "Sleep",
-      "description": "sleep for 8 hours",
+      "title": "Eat",
+      "description": "sdfg",
       "priority": "high",
-      "completed": true,
-      "createdAt": "15/4/2026",
-      "id": "_I8FicHwwmM"
-    },
-    {
-      "title": "Learn SQL",
-      "description": "Complete all the task",
-      "priority": "high",
-      "completed": true,
-      "createdAt": "15/4/2026",
-      "id": "IGdpn138NkI"
+      "completed": false,
+      "createdAt": "16/4/2026",
+      "dueDate": "2026-05-16",
+      "userId": "P72OEYvOBzE",
+      "deleted": false,
+      "id": "O3NbZCkAFW0"
     }
   ],
   "users": [
@@ -34,6 +32,15 @@
       "gender": "male",
       "address": "2/201 B\nAnnapoorani Nagar, Theethi Palayam",
       "id": "P72OEYvOBzE"
+    },
+    {
+      "name": "Sanjay Sam",
+      "email": "sam.123@gmail.com",
+      "password": "Sanjay@123",
+      "dob": "2005-06-20",
+      "gender": "male",
+      "address": "Koundampalayam",
+      "id": "dI_WkrV2QkA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
