@@ -11,20 +11,18 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
-<body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top top-0">
+<body data-theme="light">
+      <nav class="navbar navbar-expand-lg   shadow-sm sticky-top top-0" id="navBar">
         <div class="container">
-          <a href="#" class="navbar-brand fs-4 fw-bold"><i class="bi bi-check-circle-fill  icon pe-1"></i>TaskMaster</a>
+          <a href="#" class="navbar-brand fs-4 fw-bold text-theme-primary"><i class="bi bi-check-circle-fill  icon pe-1"></i>TaskMaster</a>
  <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
     <span class="navbar-toggler-icon"></span>
  </button>
    <div class="navbar-collapse collapse " id="navbarNav">
      <ul class="navbar-nav ms-auto "> 
-       <li class="nav-item pe-3 pt-3 pt-lg-0 ">
-        <input type="text" name="search" id="search" placeholder="Search" class="p-2 rounded-3  ">
-       </li>
+       
        <li class="nav-item pe-3 pt-3 pt-lg-0">
-        <a href="" class="nav-link " id="theme"><i class="bi bi-moon-fill fs-4 "></i></a>
+        <a href="#" class="nav-link text-theme-primary" id="theme" onclick="toggleTheme()"><i class="bi bi-moon-fill fs-4 "></i></a>
        </li>
        <li class="nav-item pt-3 pt-lg-0">
         <button class="btn fw-bold violet-button rounded-pill" id="user"><i class="bi bi-person-fill fs-4  "></i> User</button>
@@ -102,10 +100,10 @@
     
   </div>
     </section>
-    <section class="container py-4 px-3 d-flex flex-column gap-2 mt-5  rounded-5" style="background-color: white;border: 1px solid rgb(100, 63, 160);">
+    <section class="container py-4 px-3 d-flex flex-column gap-2 mt-5  rounded-5 bg-theme" style="border: 1px solid rgb(100, 63, 160);">
 
       <div class="d-flex justify-content-between">
-         <h3 class="fw-bold">My Tasks</h3>
+         <h3 class="fw-bold text-theme-primary">My Tasks</h3>
          <div>
                  <button class="btn  violet-button fw-bold" id="restoreTask" data-bs-toggle="modal" data-bs-target="#restoreTaskModal">Restore Task</button>
                   <button class="btn text-light fw-bold" id="addTask" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task +</button>
@@ -125,55 +123,58 @@
          </div>
          <div class="modal fade" id="addTaskModal">
               <div class="modal-dialog modal-dialog-centered">
-               <div class="modal-content">
+               <div class="modal-content rounded-5 px-5 py-4 shadow-lg modal-theme">
                   <div class="modal-header border-0">
-                       <h4 class="modal-title ms-auto">Add Task</h4>
+                       <h4 class="modal-title ms-auto text-theme-primary">Add Task</h4>
                        <button class="btn btn-close" data-bs-dismiss="modal"></button>
                   </div>
-                  <div class="modal-body">
-                       <label for="addtaskTitle" class="form-label">Title</label>
+                  <div class="modal-body d-flex flex-column gap-2">
+                       <label for="addtaskTitle" class="text-theme-secondary">Title</label>
                        <input type="text" name="addtaskTitle" id="addtaskTitle" class="form-control">
-                       <label for="addTaskDesc">Description</label>
-                       <textarea class="form-control" name="addTaskDesc" id="addTaskDesc"></textarea>
-                       <label for="addTaskPrior">Set Priority</label>
-                       <select class="form-select" name="addTaskPrior" id="addTaskPrior">
-                        <option value="high">High Priority</option>
-                        <option value="low">Low Priority</option>
+                       <label for="addTaskDesc" class="text-theme-secondary">Description</label>
+                       <textarea class="form-control text-theme-primary" name="addTaskDesc" id="addTaskDesc"></textarea>
+                       <label for="addTaskPrior" class="text-theme-secondary">Set Priority</label>
+                       <select class="form-select text-theme-secondary" name="addTaskPrior" id="addTaskPrior">
+                        <option value="high" class="text-theme-primary">High Priority</option>
+                        <option value="low" class="text-theme-primary">Low Priority</option>
                        </select>
-                       <label for="addTaskDueDate">Due date</label>
+                       <label for="addTaskDueDate" class="text-theme-secondary">Due date</label>
                        <input type="date" name="addTaskDueDate" id="addTaskDueDate">
                   </div>
                   <div class="modal-footer">
-                       <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="addTaskBtn">Add Task</button>
+                       <button type="button" class="btn text-white" data-bs-dismiss="modal" id="addTaskBtn">Add Task</button>
                   </div>
                </div>
               </div>
          </div>
       </div>
         <div>
-          <button class="btn  active-btn fw-bold" id="allTaskTab">All</button>
-          <button class="btn fw-bold" id="pendTaskTab">Pending</button>
-          <button class="btn fw-bold" id="completeTaskTab">Completed</button>
+          <button class="btn  active-btn fw-bold text-theme-primary" id="allTaskTab">All</button>
+          <button class="btn fw-bold text-theme-primary" id="pendTaskTab">Pending</button>
+          <button class="btn fw-bold text-theme-primary" id="completeTaskTab">Completed</button>
         </div>
          <div class="modal fade" id="editTaskModal">
               <div class="modal-dialog modal-dialog-centered">
-               <div class="modal-content">
+               <div class="modal-content rounded-5 px-5 py-4 shadow-lg modal-theme">
                   <div class="modal-header border-0">
-                       <h4 class="modal-title ms-auto">Update Task</h4>
+                       <h4 class="modal-title ms-auto text-theme-primary">Update Task</h4>
                        <button class="btn btn-close" data-bs-dismiss="modal"></button>
                   </div>
                   <div class="modal-body">
-                       <label for="updatetaskTitle" class="form-label">Title</label>
+                       <label for="updatetaskTitle" class="form-label text-theme-secondary">Title</label>
                        <input type="text" name="updatetaskTitle" id="updatetaskTitle" class="form-control">
-                       <label for="addTaskDesc">Description</label>
-                       <textarea class="form-control" name="updateTaskDesc" id="updateTaskDesc"></textarea>
-                       <label for="updateTaskPrior">Set Priority</label>
-                       <select class="form-select" name="updateTaskPrior" id="updateTaskPrior">
-                        <option value="high">High Priority</option>
-                        <option value="low">Low Priority</option>
+                       <label for="addTaskDesc" class="form-label text-theme-secondary">Description</label>
+                       <textarea class="form-control " name="updateTaskDesc" id="updateTaskDesc"></textarea>
+                       <label for="updateTaskPrior" class="form-label text-theme-secondary">Set Priority</label>
+                       <select class="form-select " name="updateTaskPrior" id="updateTaskPrior">
+                        <option value="high" class="">High Priority</option>
+                        <option value="low" class="">Low Priority</option>
                        </select>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="updateTaskBtn">Update Task</button>
+                    
 
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="updateTaskBtn">Update Task</button>
                   </div>
                </div>
               </div>

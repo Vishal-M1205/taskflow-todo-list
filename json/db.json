@@ -4,7 +4,7 @@
       "title": "Eat",
       "description": "Eat healthy",
       "priority": "high",
-      "completed": false,
+      "completed": true,
       "createdAt": "16/4/2026",
       "dueDate": "2026-05-23",
       "userId": "P72OEYvOBzE",

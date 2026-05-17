@@ -11,20 +11,20 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top top-0">
+<body data-theme="light">
+    <nav class="navbar navbar-expand-lg   shadow-sm sticky-top top-0" id="navBar" >
         <div class="container">
-          <a href="#" class="navbar-brand fs-4 fw-bold"><i class="bi bi-check-circle-fill  icon pe-1"></i>TaskMaster</a>
+          <a href="#" class="navbar-brand fs-4 fw-bold text-theme-primary onhover-theme-nav" ><i class="bi bi-check-circle-fill  icon pe-1 "></i>TaskMaster</a>
  <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
     <span class="navbar-toggler-icon"></span>
  </button>
    <div class="navbar-collapse collapse " id="navbarNav">
      <ul class="navbar-nav ms-auto "> 
        <li class="nav-item pe-3 pt-3 pt-lg-0">
-        <a href="#feature-section" class="nav-link">Features</a>
+        <a href="#feature-section" class="nav-link text-theme-primary onhover-theme-nav">Features</a>
        </li>
        <li class="nav-item pe-3 pt-3 pt-lg-0">
-        <a href="" class="nav-link"><i class="bi bi-moon-fill fs-4"></i></a>
+        <a href="#" class="nav-link " onclick="toggleTheme()"><i class="bi bi-moon-fill fs-4 text-theme-primary"></i></a>
        </li>
        <li class="nav-item pe-3 pt-3 pt-lg-0">
         <button class="btn   px-4 fw-bold" id="login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
@@ -41,40 +41,26 @@
     </nav>
     <section id="hero-section" class="container-fluid">
         <div class="container">
-          <div class="row align-items-center min-vh-100">
-            <div class="col-lg-6  ">
+          <div class="row align-items-center justify-content-center min-vh-100">
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center mb-5">
           <h1 class="fw-bold display-3 mb-4 hero-title fadeUp">Manage Your Tasks with Elegance</h1>
-          <p class="text-muted lead mb-4 fadeUp">A premium task management experience designed for productivity. Beautiful, intuitive, and powerful.</p>
-         
-            <button class="btn text-light fs-5 fw-bold px-4 me-2 fadeUp" id="start-free" data-bs-toggle="modal" data-bs-target="#registerModal">Get Started</button>
+          <p class="text-theme-secondary lead mb-4 fadeUp">A premium task management experience designed for productivity. Beautiful, intuitive, and powerful.</p>
+          <div class="mb-5">
+                <button class="btn text-light fs-5 fw-bold px-4 me-2 fadeUp" id="start-free" data-bs-toggle="modal" data-bs-target="#registerModal">Get Started</button>
             <button class="btn fs-5 fw-bold px-4 fadeUp" data-bs-toggle="modal" data-bs-target="#loginModal" id="sign-in-hero">Sign In</button>
+          </div>
+          
          
             </div>
-            <div class="col-lg-6">
-                   <div class="card shadow-lg rounded-4 card-float">
-                          <div class="card-body">
-                            <div class="d-flex gap-3 align-items-center">
-                              <i class="bi bi-check-circle-fill text-success fs-3"></i>
-                              <div>
-                                <h6 >Complete project proposal</h6>
-                                <p class="lead fs-6">Track your progress</p>
-                              </div>
-                            </div>
-                            <div class="progress" style="height: 8px;">
-                                  <div class=" progress-bar progress-bar-animated progress-bar-striped bg-success" style="width: 75%;"></div>
-                            </div>
-                            
-                          </div>
-                   </div>
-            </div>
+           
           </div>
         </div>
     </section>
     <section id="feature-section" class="py-5" >
          <div class="container py-5 ">
                <div class="text-center mt-5">
-                <h1 class="fw-bold ">Everything you need</h1>
-                <p class="fs-5 lead">Powerful features wrapped in simplicity</p>
+                <h1 class="fw-bold text-theme-primary ">Everything you need</h1>
+                <p class="fs-5 lead text-theme-secondary">Powerful features wrapped in simplicity</p>
                </div>
                     
                <div class="row my-5 g-3">
@@ -120,28 +106,28 @@
                </div>
          </div>
     </section>
-    <footer class="bg-light fs-6  lead text-center py-3">
+    <footer class=" fs-6  lead text-center py-3 text-theme-secondary" id="footer">
                © 2026 TaskMaster. Built with passion.   
     </footer>
     <div class="modal fade " id="loginModal">
     <div class="modal-dialog modal-dialog-centered "> 
-   <div class="modal-content rounded-5 shadow-lg px-5 py-4">
+   <div class="modal-content rounded-5 shadow-lg px-5 py-4 modal-theme">
          <div class="modal-header border-0 ">
-              <h5 class="modal-title ms-auto fs-2 fw-bold">Welcome back!</h5>
-              <button class="btn btn-close" data-bs-dismiss="modal"></button>
+              <h5 class="modal-title me-auto fs-2 fw-bold text-theme-primary">Welcome back!</h5>
+              <button class="btn text-theme-primary" data-bs-dismiss="modal"><i class="bi bi-x-lg fw-bold"></i></button>
          </div>
          <div class="modal-body ">
-              <label for="loginEmail" class="form-label fs-5 lead">Email</label>
-              <input type="text" name="loginEmail" id="loginEmail" class="form-control " placeholder="Enter your mail id.."
+              <label for="loginEmail" class="form-label fs-5 lead text-theme-secondary">Email</label>
+              <input type="text" name="loginEmail" id="loginEmail" class="form-control text-theme-primary" placeholder="Enter your mail id.."
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
-              <label for="loginPass" class="form-label fs-5 lead mt-3">Password</label>
-              <input type="text" name="loginPass" id="loginPass" class="form-control " placeholder="Enter your password"
+              <label for="loginPass" class="form-label fs-5 lead mt-3 text-theme-secondary">Password</label>
+              <input type="text" name="loginPass" id="loginPass" class="form-control text-theme-primary" placeholder="Enter your password"
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
               
          </div>
          <div class="modal-footer "> 
          <button class="btn btn-primary w-100 fs-4 fw-semibold" id="sign-in">Sign-in</button>
-         <p class="lead fs-6 m-auto mt-2">Don't you have an account? <a data-bs-toggle="modal" data-bs-target="#registerModal" class="text-primary" style="cursor: pointer
+         <p class="lead fs-6 m-auto mt-2 text-theme-secondary">Don't you have an account? <a data-bs-toggle="modal" data-bs-target="#registerModal" class="text-primary" style="cursor: pointer
          ;">Register now</a></p>
          </div>
    </div>
@@ -149,43 +135,43 @@
     </div>
     <div class="modal fade" id="registerModal">
   <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable">
-        <div class="modal-content rounded-5 px-5 py-4 shadow-lg">
+        <div class="modal-content rounded-5 px-5 py-4 shadow-lg modal-theme">
            <div class="modal-header border-0">
-                 <h5 class="modal-title ms-auto fs-2 fw-bold">Create Account</h5>
-                 <button class="btn btn-close" data-bs-dismiss="modal"></button>
+                 <h5 class="modal-title me-auto fs-2 fw-bold text-theme-primary">Create Account</h5>
+                 <button class="btn text-theme-primary" data-bs-dismiss="modal"><i class="bi bi-x-lg fw-bold"></i></button>
            </div>
            <div class="modal-body">
-              <label for="name" class="form-label fs-5 lead">Full Name</label>
-              <input type="text" name="name" id="name" class="form-control " placeholder="Enter your name.."
+              <label for="name" class="form-label fs-5 lead text-theme-secondary">Full Name</label>
+              <input type="text" name="name" id="name" class="form-control text-theme-primary" placeholder="Enter your name.."
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
-              <label for="email" class="form-label fs-5 lead mt-3">Email</label>
-              <input type="text" name="email" id="email" class="form-control " placeholder="Enter your mail id.."
+              <label for="email" class="form-label fs-5 lead mt-3 text-theme-secondary">Email</label>
+              <input type="text text-theme-primary" name="email" id="email" class="form-control " placeholder="Enter your mail id.."
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
-              <label for="pass" class="form-label fs-5 lead mt-3">Password</label>
-              <input type="password" name="pass" id="pass" class="form-control " placeholder="Enter your password"
+              <label for="pass" class="form-label fs-5 lead mt-3 text-theme-secondary">Password</label>
+              <input type="password text-theme-primary" name="pass" id="pass" class="form-control " placeholder="Enter your password"
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
-              <label for="cpass" class="form-label fs-5 lead mt-3">Confirm Password</label>
-              <input type="password" name="cpass" id="cpass" class="form-control" placeholder="Confirm your password"
+              <label for="cpass" class="form-label fs-5 lead mt-3 text-theme-secondary">Confirm Password</label>
+              <input type="password text-theme-primary" name="cpass" id="cpass" class="form-control" placeholder="Confirm your password"
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
-              <label for="dob" class="form-label fs-5 lead mt-3">Date of Birth</label>
-              <input type="date" name="dob" id="dob" class="form-control"  style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
-              <label for="gen" class="form-label fs-5 lead mt-3 d-block">Gender</label>
-              <label for="male" class="form-label">Male</label>
+              <label for="dob" class="form-label fs-5 lead mt-3 text-theme-secondary">Date of Birth</label>
+              <input type="date text-theme-primary" name="dob" id="dob" class="form-control"  style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
+              <label for="gen" class="form-label fs-5 lead mt-3 d-block text-theme-secondary">Gender</label>
+              <label for="male" class="form-label text-theme-secondary">Male</label>
               <input type="radio" name="gen" id="male" value="male" class="me-3"            >
-              <label for="female" class="form-label">Female</label>
+              <label for="female" class="form-label text-theme-secondary">Female</label>
               <input type="radio" name="gen" id="female" value="female" >
-                <label for="addr" class="form-label fs-5 lead mt-3 d-block">Address</label>
-                <textarea name="addr" id="addr" class="form-control"  style="background-color: rgba(128, 128, 128, 0.149);"></textarea>
-              <label for="role" class="form-label fs-5 lead mt-3 d-block">Role</label>
-              <select name="role" id="role" class="form-control" style="background-color: rgba(128, 128, 128, 0.149);">
+                <label for="addr" class="form-label fs-5 lead mt-3 d-block text-theme-secondary">Address</label>
+                <textarea name="addr" id="addr" class="form-control text-theme-primary"  style="background-color: rgba(128, 128, 128, 0.149);"></textarea>
+              <label for="role" class="form-label fs-5 lead mt-3 d-block text-theme-secondary">Role</label>
+              <select name="role" id="role" class="form-control text-theme-primary" style="background-color: rgba(128, 128, 128, 0.149);">
                 <option value="prefer not to say">Prefer not to say</option>
-                <option value="student">Student</option>
-                <option value="working">Working Professional</option>
+                <option value="student" class="text-theme-primary">Student</option>
+                <option value="working" class="text-theme-primary">Working Professional</option>
               </select>
            </div>
             <div class="modal-footer "> 
          <button class="btn btn-primary w-100 fs-4 fw-semibold" id="register">Get Started</button>
-         <p class="lead fs-6 m-auto mt-2">Already have an account? <a data-bs-toggle="modal" data-bs-target="#loginModal" class="text-primary" style="cursor: pointer
+         <p class="lead fs-6 m-auto mt-2 text-theme-secondary">Already have an account? <a data-bs-toggle="modal" data-bs-target="#loginModal" class="text-primary" style="cursor: pointer
          ;">Sign-in</a></p>
          </div>
         </div>

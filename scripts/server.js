@@ -12,6 +12,38 @@ toastr.options = {
         "preventDuplicates": true
       }
 
+function isOverdue(dueDate, completed){
+
+    if(completed) return false;
+
+    const today = new Date();
+
+    const taskDueDate = new Date(dueDate);
+
+    today.setHours(0,0,0,0);
+    taskDueDate.setHours(0,0,0,0);
+
+    return taskDueDate < today;
+}
+
+function toggleTheme(){
+  const currentTheme = document.body.getAttribute("data-theme");
+
+    if(currentTheme === "dark"){
+
+        document.body.setAttribute("data-theme", "light");
+
+        
+    }
+    else{
+
+        document.body.setAttribute("data-theme", "dark");
+
+      
+    }
+}
+
+
 let allTaskTab = false;
 let pendingTaskTab = false;
 let completedTskTab = false;
@@ -64,7 +96,25 @@ async function getAllTask() {
                   <div class="${task.completed?"completed-text":""}">
                        <h4>${task.title}</h4>
                        <p>${task.description}</p>
-                       <p class="${task.completed?"completed":"pending"}"><i class="bi ${task.completed?"bi-check-circle":"bi-clock"}"></i>${task.completed?"Completed":"Pending"}</p>
+                       <p class="text-secondary mb-1">
+        <i class="bi bi-calendar-event"></i>
+        Created: ${task.createdAt}
+    </p>
+     <p class="text-secondary mb-2">
+        <i class="bi bi-calendar2-check"></i>
+        Due: ${task.dueDate}
+    </p>
+                       <span class="${task.completed?"completed":"pending"}"><i class="bi ${task.completed?"bi-check-circle":"bi-clock"}"></i>${task.completed?"Completed":"Pending"}</span>
+                         ${
+        isOverdue(task.dueDate, task.completed)
+        ?
+        `<span class="overdue mb-2">
+            <i class="bi bi-exclamation-circle"></i>
+            Overdue
+        </span>`
+        :
+        ""
+    }
                   </div>
                   ${task.completed?`
                     <div>
