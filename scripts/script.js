@@ -12,17 +12,20 @@ toastr.options = {
 function toggleTheme(){
   const currentTheme = document.body.getAttribute("data-theme");
 
-    if(currentTheme === "dark"){
 
+    if(currentTheme === "dark"){
+        $('#themeBtn').removeClass('bi-sun-fill')
+        $('#themeBtn').addClass('bi-moon-fill')
         document.body.setAttribute("data-theme", "light");
 
-        themeBtn.innerText = "Dark Mode";
+        
     }
     else{
-
+      $('#themeBtn').addClass('bi-sun-fill')
+        $('#themeBtn').removeClass('bi-moon-fill')
         document.body.setAttribute("data-theme", "dark");
 
-        themeBtn.innerText = "Light Mode";
+       
     }
 }
 

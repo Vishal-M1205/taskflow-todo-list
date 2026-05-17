@@ -22,11 +22,12 @@
      <ul class="navbar-nav ms-auto "> 
        
        <li class="nav-item pe-3 pt-3 pt-lg-0">
-        <a href="#" class="nav-link text-theme-primary" id="theme" onclick="toggleTheme()"><i class="bi bi-moon-fill fs-4 "></i></a>
+        <a href="#" class="nav-link text-theme-primary" id="theme" onclick="toggleTheme()"><i class="bi bi-moon-fill fs-4 " id="themeBtn"></i></a>
        </li>
        <li class="nav-item pt-3 pt-lg-0">
-        <button class="btn fw-bold violet-button rounded-pill" id="user"><i class="bi bi-person-fill fs-4  "></i> User</button>
+        <button class="btn fw-bold violet-button rounded-pill" id="user" data-bs-toggle="modal" data-bs-target="#userModal"><i class="bi bi-person-fill fs-4"></i> User</button>
        </li>
+       
        <li class="nav-item pt-3 pt-lg-0">
         <button class="btn fw-bold violet-button rounded-pill ms-lg-3" id="logoutBtn"><i class="bi bi-door-open fs-4  "></i> Logout</button>
        </li>
@@ -37,6 +38,29 @@
        
 
     </nav>
+    <div class="modal fade" id="userModal">
+          <div class="modal-dialog modal-dialog-centered">
+             <div class="modal-content rounded-3 px-5 py-4 shadow-lg modal-theme ">
+                    <div class="modal-header">
+                       <p class="modal-title me-auto text-theme-primary">User Details</p>
+                       <button class="btn text-theme-primary" data-bs-dismiss="modal">
+                         <i class="bi bi-x-lg fs-4 fs-bold "></i>
+                       </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="name" class="form-label text-theme-secondary">Name</label>
+                        <span id="userName" class="text-theme-primary">Vishal Manivannan</span>
+                       <label for="email" class="form-label text-theme-secondary">Email</label>
+                       <span id="userEmail" class="text-theme-primary">visowmani.123@gmail.com</span>
+                       <label for="doc" class="form-label text-theme-secondary">Date of Birth</label>
+                       <span id="userDob" class="text-theme-primary">2005-11-12</span>
+                       <label for="gender" class="form-label text-theme-secondary">Gender</label>
+                       <span id="userGender" class="text-theme-primary">male</span>
+                       
+                    </div>
+             </div>
+          </div>
+       </div>
     <section class="container mt-5">
   <div class="row g-5">
     <div class="col-lg-4 ">
@@ -125,21 +149,21 @@
               <div class="modal-dialog modal-dialog-centered">
                <div class="modal-content rounded-5 px-5 py-4 shadow-lg modal-theme">
                   <div class="modal-header border-0">
-                       <h4 class="modal-title ms-auto text-theme-primary">Add Task</h4>
-                       <button class="btn btn-close" data-bs-dismiss="modal"></button>
+                       <h4 class="modal-title me-auto text-theme-primary">Add Task</h4>
+                       <button class="btn text-theme-primary" data-bs-dismiss="modal"><i class="bi bi-x-lg fs-4 fw-bold"></i></button>
                   </div>
                   <div class="modal-body d-flex flex-column gap-2">
                        <label for="addtaskTitle" class="text-theme-secondary">Title</label>
-                       <input type="text" name="addtaskTitle" id="addtaskTitle" class="form-control">
+                       <input type="text" name="addtaskTitle" id="addtaskTitle" class="form-control text-theme-primary"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
                        <label for="addTaskDesc" class="text-theme-secondary">Description</label>
-                       <textarea class="form-control text-theme-primary" name="addTaskDesc" id="addTaskDesc"></textarea>
+                       <textarea class="form-control text-theme-primary" name="addTaskDesc" id="addTaskDesc"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);"></textarea>
                        <label for="addTaskPrior" class="text-theme-secondary">Set Priority</label>
-                       <select class="form-select text-theme-secondary" name="addTaskPrior" id="addTaskPrior">
+                       <select class="form-select text-theme-primary"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);" name="addTaskPrior" id="addTaskPrior">
                         <option value="high" class="text-theme-primary">High Priority</option>
                         <option value="low" class="text-theme-primary">Low Priority</option>
                        </select>
                        <label for="addTaskDueDate" class="text-theme-secondary">Due date</label>
-                       <input type="date" name="addTaskDueDate" id="addTaskDueDate">
+                       <input type="date" name="addTaskDueDate" id="addTaskDueDate" class="text-theme-primary form-control"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
                   </div>
                   <div class="modal-footer">
                        <button type="button" class="btn text-white" data-bs-dismiss="modal" id="addTaskBtn">Add Task</button>
@@ -157,18 +181,19 @@
               <div class="modal-dialog modal-dialog-centered">
                <div class="modal-content rounded-5 px-5 py-4 shadow-lg modal-theme">
                   <div class="modal-header border-0">
-                       <h4 class="modal-title ms-auto text-theme-primary">Update Task</h4>
-                       <button class="btn btn-close" data-bs-dismiss="modal"></button>
+                       <h4 class="modal-title me-auto text-theme-primary">Update Task</h4>
+                       <button class="btn text-theme-primary" data-bs-dismiss="modal"><i class="bi bi-x-lg fs-4 fw-bold"></i></button>
                   </div>
                   <div class="modal-body">
                        <label for="updatetaskTitle" class="form-label text-theme-secondary">Title</label>
-                       <input type="text" name="updatetaskTitle" id="updatetaskTitle" class="form-control">
+                       <input type="text" name="updatetaskTitle" id="updatetaskTitle" class="form-control text-theme-primary"
+              style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
                        <label for="addTaskDesc" class="form-label text-theme-secondary">Description</label>
-                       <textarea class="form-control " name="updateTaskDesc" id="updateTaskDesc"></textarea>
+                       <textarea class="form-control text-theme-primary" name="updateTaskDesc" id="updateTaskDesc"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);"></textarea>
                        <label for="updateTaskPrior" class="form-label text-theme-secondary">Set Priority</label>
-                       <select class="form-select " name="updateTaskPrior" id="updateTaskPrior">
-                        <option value="high" class="">High Priority</option>
-                        <option value="low" class="">Low Priority</option>
+                       <select class="form-select text-theme-primary" name="updateTaskPrior" id="updateTaskPrior"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
+                        <option value="high" class="text-theme-primary">High Priority</option>
+                        <option value="low" class="text-theme-primary">Low Priority</option>
                        </select>
                     
 

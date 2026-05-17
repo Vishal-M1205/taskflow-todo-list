@@ -29,17 +29,20 @@ function isOverdue(dueDate, completed){
 function toggleTheme(){
   const currentTheme = document.body.getAttribute("data-theme");
 
-    if(currentTheme === "dark"){
 
+    if(currentTheme === "dark"){
+        $('#themeBtn').removeClass('bi-sun-fill')
+        $('#themeBtn').addClass('bi-moon-fill')
         document.body.setAttribute("data-theme", "light");
 
         
     }
     else{
-
+      $('#themeBtn').addClass('bi-sun-fill')
+        $('#themeBtn').removeClass('bi-moon-fill')
         document.body.setAttribute("data-theme", "dark");
 
-      
+       
     }
 }
 
@@ -165,7 +168,25 @@ async function getPendorCompleteTask(val){
                   <div class="${task.completed?"completed-text":""}">
                        <h4>${task.title}</h4>
                        <p>${task.description}</p>
-                       <p class="${task.completed?"completed":"pending"}"><i class="bi ${task.completed?"bi-check-circle":"bi-clock"}"></i>${task.completed?"Completed":"Pending"}</p>
+                       <p class="text-secondary mb-1">
+        <i class="bi bi-calendar-event"></i>
+        Created: ${task.createdAt}
+    </p>
+     <p class="text-secondary mb-2">
+        <i class="bi bi-calendar2-check"></i>
+        Due: ${task.dueDate}
+    </p>
+                       <span class="${task.completed?"completed":"pending"}"><i class="bi ${task.completed?"bi-check-circle":"bi-clock"}"></i>${task.completed?"Completed":"Pending"}</span>
+                       ${
+        isOverdue(task.dueDate, task.completed)
+        ?
+        `<span class="overdue mb-2">
+            <i class="bi bi-exclamation-circle"></i>
+            Overdue
+        </span>`
+        :
+        ""
+    }
                   </div>
                   ${task.completed?`
                     <div>
