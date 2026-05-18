@@ -453,6 +453,14 @@ async function restoreTask(id) {
     
 }
 
+$('#user').on('click',()=>{
+    try {
+        const response = await fetch(`${API}/`)
+    } catch (error) {
+        
+    }
+})
+
 getTaskCount();
 getAllTask();
 
