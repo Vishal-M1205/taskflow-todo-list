@@ -120,15 +120,23 @@ async function getAllTask() {
     }
                   </div>
                   ${task.completed?`
+                    <div class="d-flex flex-column justify-content-between align-items-center">
                     <div>
-                       <button class="btn rounded-2 text-warning border-1 border-secondary-subtle py-2  fs-4 redo-btn border" onClick="undoTask('${task.id}')"><i class="bi bi-arrow-counterclockwise "></i></button>
+                    <button class="btn rounded-2 text-warning border-1 border-secondary-subtle py-2  fs-4 redo-btn border" onClick="undoTask('${task.id}')"><i class="bi bi-arrow-counterclockwise  "></i></button>
+                      
                       <button class="btn text-danger fs-4 rounded-2 border-1 border-secondary-subtle py-2 border trash-btn" onClick="deleteTask('${task.id}')"><i class="bi bi-trash"></i></button>
+                    </div>
+                    ${task.priority=='high'?`<p class="text-center rounded-pill fs-6 fw-bold text-danger bg-danger-subtle px-3 py-2 mb-0">High priority</p>`:`<p class="text-center rounded-pill fs-6 fw-bold text-info bg-info-subtle px-3 py-2 mb-0">Low Priority</p>`}
+                       
                   </div>
                     `:`
+                     <div class="d-flex flex-column justify-content-between align-items-center">
                      <div>
                       <button class="btn rounded-2 text-success border-1 border-secondary-subtle py-2  fs-4 check-btn border" onClick="completeTask('${task.id}')"><i class="bi bi-check-circle  "></i></button>
                       <button class="btn fs-4 rounded-2 border-1 border-secondary-subtle py-2 border edit-btn" data-bs-toggle="modal" data-bs-target="#editTaskModal" onClick="updateTask('${task.id}')"><i class="bi bi-pencil " ></i></button>
                       <button class="btn text-danger fs-4 rounded-2 border-1 border-secondary-subtle py-2 border trash-btn" onClick="deleteTask('${task.id}')"><i class="bi bi-trash"></i></button>
+                     </div>
+                     ${task.priority=='high'?`<p class="text-center rounded-pill fs-6 fw-bold text-danger bg-danger-subtle px-3 py-2 mb-0">High priority</p>`:`<p class="text-center rounded-pill fs-6 fw-bold text-info bg-info-subtle px-3 py-2 mb-0">Low Priority</p>`}
                   </div>
                     `}
                  
@@ -189,16 +197,24 @@ async function getPendorCompleteTask(val){
     }
                   </div>
                   ${task.completed?`
+                    <div class="d-flex flex-column justify-content-between align-items-center">
                     <div>
-                       <button class="btn rounded-2 text-warning border-1 border-secondary-subtle py-2  fs-4 redo-btn border" onClick="undoTask('${task.id}')"><i class="bi bi-arrow-counterclockwise  "></i></button>
+                    <button class="btn rounded-2 text-warning border-1 border-secondary-subtle py-2  fs-4 redo-btn border" onClick="undoTask('${task.id}')"><i class="bi bi-arrow-counterclockwise  "></i></button>
                       
                       <button class="btn text-danger fs-4 rounded-2 border-1 border-secondary-subtle py-2 border trash-btn" onClick="deleteTask('${task.id}')"><i class="bi bi-trash"></i></button>
+                    </div>
+                    ${task.priority=='high'?`<p class="text-center rounded-pill fs-6 fw-bold text-danger bg-danger-subtle px-3 py-2">High priority</p>`:`<p class="text-center rounded-pill fs-6 fw-bold text-info bg-info-subtle px-3 py-2">Low Priority</p>`}
+                       
                   </div>
                     `:`
+                      <div class="d-flex flex-column justify-content-between align-items-center">
                      <div>
                       <button class="btn rounded-2 text-success border-1 border-secondary-subtle py-2  fs-4 check-btn border" onClick="completeTask('${task.id}')"><i class="bi bi-check-circle  "></i></button>
                       <button class="btn fs-4 rounded-2 border-1 border-secondary-subtle py-2 border edit-btn" data-bs-toggle="modal" data-bs-target="#editTaskModal" onClick="updateTask('${task.id}')"><i class="bi bi-pencil " ></i></button>
                       <button class="btn text-danger fs-4 rounded-2 border-1 border-secondary-subtle py-2 border trash-btn" onClick="deleteTask('${task.id}')"><i class="bi bi-trash"></i></button>
+                     </div>
+                     ${task.priority=='high'?`<p class="text-center rounded-pill fs-6 fw-bold text-danger bg-danger-subtle px-3 py-2 mb-0">High priority</p>`:`<p class="text-center rounded-pill fs-6 fw-bold text-info bg-info-subtle px-3 py-2 mb-0">Low Priority</p>`}
+                  </div>
                   </div>
                     `}
                  
@@ -407,9 +423,9 @@ async function restoreTaskListModal() {
      data.forEach((task)=>{
            const div = document.createElement('div');
            div.innerHTML = `
-           <div class="coontainer d-flex justify-content-between rounded-3 shadow-lg px-3 py-2 align-items-center">
+           <div class="container card-theme d-flex justify-content-between rounded-3 shadow-lg px-3 py-2 align-items-center">
            <div>
-           <p class="fs-4 mb-0">${task.title}</p>
+           <p class="fs-4 mb-0 text-theme-primary">${task.title}</p>
            </div>
            <div>
            <button class="btn border-1 border-warning text-warning" ><i class="bi bi-bootstrap-reboot fs-4" onClick="restoreTask('${task.id}')"></i></button>
@@ -453,9 +469,17 @@ async function restoreTask(id) {
     
 }
 
-$('#user').on('click',()=>{
+$('#user').on('click',async ()=>{
     try {
-        const response = await fetch(`${API}/`)
+        const response = await fetch(`${API}/users/${userId}`)
+        const data = await response.json();
+        console.log(data)
+        $('#userName').text(data.name);
+        $('#userEmail').text(data.email);
+        $('#userDob').text(data.dob);
+        $('#userGender').text(data.gender);
+        $('#userAddress').text(data.address);
+
     } catch (error) {
         
     }

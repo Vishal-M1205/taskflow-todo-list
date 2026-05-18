@@ -13,7 +13,8 @@
     --success-gradient: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
     --bg-gradient: linear-gradient(135deg,#ffffff 30%, #cebff7 70% );
     --hero-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    --box-shadow: 2px 2px 10px #667eea
+    --box-shadow: 2px 2px 10px #667eea;
+    --bg-card-theme: rgba(255, 255, 255, 0.822);
 }
 
 [data-theme="dark"] {
@@ -26,6 +27,7 @@
     --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.5);
     --bg-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
     --hero-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    --bg-card-theme: rgba(85, 67, 187, 0.822);
 }
 
 #navBar,#footer{
@@ -50,6 +52,10 @@
 
 .modal-theme{
     background-color: var(--bg-primary);
+}
+
+.card-theme{
+ background-color: var(--bg-card-theme);
 }
 body{
     background: var(--bg-gradient);
