@@ -270,6 +270,7 @@ async function completeTask(id){
      else{
         getPendorCompleteTask(false)
      }
+     toastr.success('Task Completed')
    } catch (error) {
     
    }
@@ -310,8 +311,9 @@ async function updateTask(id){
         $('#updatetaskTitle').val(data.title);
         $('#updateTaskDesc').val(data.description);
         $('#updateTaskPrior').val(data.priority);
+        $('#updateTaskDate').val(data.dueDate);
         console.log(data);
-        $('#updateTaskBtn').on('click',async ()=>{
+        $('#updateTaskBtn').off('click').on('click',async ()=>{
             const updateResponse = await fetch(`${API}/tasks/${id}`,{
                 method:'PATCH',
                 headers:{
@@ -320,7 +322,8 @@ async function updateTask(id){
                 body:JSON.stringify({
                     title : $('#updatetaskTitle').val(),
                     description:$('#updateTaskDesc').val(),
-                    priority:$('#updateTaskPrior').val()
+                    priority:$('#updateTaskPrior').val(),
+                    dueDate:$('#updateTaskDate').val()
                 })
             })
             getTaskCount();
@@ -333,7 +336,9 @@ async function updateTask(id){
      else{
         getPendorCompleteTask(false)
      }
-        })
+      toastr.success('Updated Successfully')
+     })
+   
          
     } catch (error) {
         console.log(error);
@@ -362,6 +367,7 @@ async function deleteTask(id){
      else{
         getPendorCompleteTask(false)
      }
+     toastr.error('Task Deleted')
     } catch (error) {
          console.log(error)
     }
@@ -431,6 +437,7 @@ async function restoreTaskListModal() {
            `
            restoreTaskList.append(div)
      })
+     
     } catch (error) {
         console.log(error)
     }
@@ -447,6 +454,7 @@ async function restoreTask(id) {
             deleted:false
         })
     })
+    toastr.warning('Task Restored')
     restoreTaskListModal();
     getTaskCount();
      if(allTaskTab){
