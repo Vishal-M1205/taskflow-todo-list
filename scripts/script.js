@@ -85,7 +85,7 @@ function toggleTheme(){
          }
          if(!passValidate($('#pass').val())){
           isValid = false;
-          toastr.warning("Invalid password")
+          toastr.warning("Invalid password password must contain 8-15 characters, at least one uppercase letter, one lowercase letter, one number and one special character")
           return
          }
          if($('#pass').val() !== $('#cpass').val()){

@@ -15,14 +15,10 @@ toastr.options = {
 function isOverdue(dueDate, completed){
 
     if(completed) return false;
-
     const today = new Date();
-
     const taskDueDate = new Date(dueDate);
-
     today.setHours(0,0,0,0);
     taskDueDate.setHours(0,0,0,0);
-
     return taskDueDate < today;
 }
 

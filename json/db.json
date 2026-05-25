@@ -15,7 +15,7 @@
       "title": "Eat",
       "description": "sdfg",
       "priority": "high",
-      "completed": false,
+      "completed": true,
       "createdAt": "16/4/2026",
       "dueDate": "2026-05-16",
       "userId": "P72OEYvOBzE",
