@@ -32,6 +32,17 @@
       "userId": "P72OEYvOBzE",
       "deleted": false,
       "id": "PFT6qLfFOsg"
+    },
+    {
+      "title": "Test1",
+      "description": "Testing11",
+      "priority": "high",
+      "completed": false,
+      "createdAt": "25/4/2026",
+      "dueDate": "2026-05-30",
+      "userId": "NcMsroA53O8",
+      "deleted": true,
+      "id": "232JEjuAy4A"
     }
   ],
   "users": [
@@ -52,6 +63,15 @@
       "gender": "male",
       "address": "Koundampalayam",
       "id": "dI_WkrV2QkA"
+    },
+    {
+      "name": "seeli",
+      "email": "seeli@gmail.com",
+      "password": "Seeli@123",
+      "dob": "2026-05-30",
+      "gender": "male",
+      "address": "seeli",
+      "id": "NcMsroA53O8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
