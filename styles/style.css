@@ -213,6 +213,15 @@ body{
     background-color:rgba(65, 204, 65, 0.495) ;
 
 }
+.start-btn{
+    transition: all 0.4s;
+}
+.start-btn:hover{
+    
+    transform: scale(1.1);
+    background-color:rgba(160, 233, 235, 0.495) ;
+
+}
 
 .edit-btn{
     color: rgba(124, 104, 238, 0.822) !important;
@@ -252,6 +261,15 @@ body{
 .completed{
     background-color: rgba(3, 232, 3, 0.511);
     color: rgb(33, 134, 0);
+    font-weight: bold;
+    width: fit-content;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+}
+.not-started{
+     background-color: rgba(232, 3, 3, 0.511);
+    
+    color: rgb(221, 255, 0);
     font-weight: bold;
     width: fit-content;
     padding: 5px 10px 5px 10px;

@@ -53,6 +53,7 @@ function toggleTheme(){
 let allTaskTab = false;
 let pendingTaskTab = false;
 let completedTskTab = false;
+let notStartedTaskTab = false;
 
 async function addTask(){
           try {
@@ -73,7 +74,8 @@ async function addTask(){
             createdAt : `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
             dueDate : dueDate,
             userId : userId,
-            deleted:false
+            deleted:false,
+            started:false
         })
     })
     console.log('Data added');
@@ -88,12 +90,13 @@ async function addTask(){
 async function getAllTask() {
     try {
     console.log(userId)
-    const response = await fetch(`${API}/tasks?userId=${userId}&deleted=false`) 
+    const response = await fetch(`${API}/tasks?userId=${userId}&deleted=false&started=true`) 
     const data = await response.json()
     console.log(data)
     taskList.replaceChildren();
     completedTaskTab = false;
     pendingTaskTab = false;
+    notStartedTaskTab = false;
     allTaskTab = true;
     data.forEach(task => {
         const div = document.createElement('div');
@@ -161,13 +164,15 @@ async function getPendorCompleteTask(val){
             completedTaskTab = true;
             pendingTaskTab = false;
             allTaskTab = false;
+            notStartedTaskTab = false;
         }
         else{
             completedTaskTab = false;
             pendingTaskTab = true;
             allTaskTab = false;
+            notStartedTaskTab = false;
         }
-    const response = await fetch(`${API}/tasks?completed=${val}&userId=${userId}&deleted=false`) 
+    const response = await fetch(`${API}/tasks?completed=${val}&userId=${userId}&deleted=false&started=true`) 
     const data = await response.json()
     console.log(data)
     taskList.replaceChildren();
@@ -232,23 +237,88 @@ async function getPendorCompleteTask(val){
     }
 }
 
+async function getNotStartedTask(){
+   try {
+    completedTaskTab = false;
+    pendingTaskTab = false;
+    allTaskTab = false;
+    notStartedTaskTab = true;
+    const response = await fetch(`${API}/tasks?started=false&userId=${userId}&deleted=false`)
+    const data = await response.json();
+    console.log(data);
+        taskList.replaceChildren();
+        data.forEach(task => {
+         const div = document.createElement('div');
+     div.innerHTML = ` <div class="card  rounded-4 shadow-sm">
+            <div class="card-body d-flex justify-content-between">
+                  <div class="${task.completed?"completed-text":""}">
+                       <h4>${task.title}</h4>
+                       <p>${task.description}</p>
+                       <p class="text-secondary mb-1">
+        <i class="bi bi-calendar-event"></i>
+        Created: ${task.createdAt}
+    </p>
+     <p class="text-secondary mb-2">
+        <i class="bi bi-calendar2-check"></i>
+        Due: ${task.dueDate}
+    </p>
+                       <span class="not-started"><i class="bi bi-cone-striped px-1"></i>Not Started</span>
+                       ${
+        isOverdue(task.dueDate, task.completed)
+        ?
+        `<span class="overdue mb-2">
+            <i class="bi bi-exclamation-circle"></i>
+            Overdue
+        </span>`
+        :
+        ""
+    }
+                  </div>
+                  
+                    <div class="d-flex flex-column justify-content-between align-items-center">
+                     <div>
+                      <button class="btn rounded-2 text-info border-1 border-secondary-subtle py-2  fs-4 start-btn border" onClick="startTask('${task.id}')"><i class="bi bi-rocket-takeoff  "></i></button>
+                      <button class="btn fs-4 rounded-2 border-1 border-secondary-subtle py-2 border edit-btn" data-bs-toggle="modal" data-bs-target="#editTaskModal" onClick="updateTask('${task.id}')"><i class="bi bi-pencil " ></i></button>
+                      <button class="btn text-danger fs-4 rounded-2 border-1 border-secondary-subtle py-2 border trash-btn" onClick="deleteTask('${task.id}')"><i class="bi bi-trash"></i></button>
+                     </div>
+                     ${task.priority=='high'?`<p class="text-center rounded-pill fs-6 fw-bold text-danger bg-danger-subtle px-3 py-2 mb-0">High priority</p>`:`<p class="text-center rounded-pill fs-6 fw-bold text-info bg-info-subtle px-3 py-2 mb-0">Low Priority</p>`}
+                  </div>
+                  </div>
+                  </div>`
+                taskList.append(div)
+                })
+        
+   } catch (error) {
+     
+   }
+
+}
+
+
+
 async function getTaskCount() {
     try {
     const allTaskResponse = await fetch(`${API}/tasks?userId=${userId}&deleted=false`) 
     const allTaskData = await allTaskResponse.json()
     $('#totalTaskCard').text(allTaskData.length)
 
-    const completedTaskResponse = await fetch(`${API}/tasks?completed=true&userId=${userId}&deleted=false`)
+    const completedTaskResponse = await fetch(`${API}/tasks?completed=true&userId=${userId}&deleted=false&started=true`)
     const completedTaskData = await completedTaskResponse.json()
     $('#completeTaskCard').text(completedTaskData.length);
     const completePercent = (completedTaskData.length/allTaskData.length)*100
     $('#completeProgBar').css('width',`${completePercent}%`)
     
-    const pendingTaskResponse = await fetch(`${API}/tasks?completed=false&userId=${userId}&deleted=false`)
+    const pendingTaskResponse = await fetch(`${API}/tasks?completed=false&userId=${userId}&deleted=false&started=true`)
     const pendingTaskData = await pendingTaskResponse.json()
     $('#pendingTaskCard').text(pendingTaskData.length);
     const pendingPercent = (pendingTaskData.length/allTaskData.length)*100
     $('#pendingProgBar').css('width',`${pendingPercent}%`)
+
+        const notStartedTaskResponse = await fetch(`${API}/tasks?started=false&userId=${userId}&deleted=false`)
+    const notStartedTaskData = await notStartedTaskResponse.json()
+    $('#notStartedTaskCard').text(notStartedTaskData.length);
+    const notStartedPercent = (notStartedTaskData.length/allTaskData.length)*100
+    $('#notStartedProgBar').css('width',`${notStartedPercent}%`)
     } catch (error) {
         
     }
@@ -350,8 +420,11 @@ async function updateTask(id){
      else if(completedTaskTab){
         getPendorCompleteTask(true)
      }
-     else{
+     else if(pendingTaskTab){
         getPendorCompleteTask(false)
+     }
+     else{
+        getNotStartedTask()
      }
       toastr.success('Updated Successfully')
      })
@@ -389,8 +462,11 @@ async function deleteTask(id){
      else if(completedTaskTab){
         getPendorCompleteTask(true)
      }
-     else{
+     else if(pendingTaskTab){
         getPendorCompleteTask(false)
+     }
+     else{
+        getNotStartedTask()
      }
      toastr.error('Task Deleted')
     } catch (error) {
@@ -403,7 +479,18 @@ $('#addTaskBtn').on('click',  async ()=>{
   
   const response =await addTask();
   toastr.success(response)
-  getAllTask();
+  if(allTaskTab){
+        getAllTask()
+     }
+     else if(completedTaskTab){
+        getPendorCompleteTask(true)
+     }
+     else if(pendingTaskTab){
+        getPendorCompleteTask(false)
+     }
+     else{
+        getNotStartedTask()
+     }
   getTaskCount()
   $('#addtaskTitle').val("");
   $('#addTaskDesc').val("");
@@ -413,6 +500,7 @@ $('#pendTaskTab').on('click',()=>{
     $('#allTaskTab').removeClass('active-btn');
     $('#completeTaskTab').removeClass('active-btn');
     $('#pendTaskTab').addClass('active-btn');
+    $('#notStartedTaskTab').removeClass('active-btn');
     getPendorCompleteTask(false);
 })
 
@@ -420,6 +508,7 @@ $('#allTaskTab').on('click',()=>{
     $('#pendTaskTab').removeClass('active-btn');
     $('#completeTaskTab').removeClass('active-btn');
     $('#allTaskTab').addClass('active-btn');
+    $('#notStartedTaskTab').removeClass('active-btn');
      getAllTask();
 })
 
@@ -427,7 +516,15 @@ $('#completeTaskTab').on('click',()=>{
     $('#allTaskTab').removeClass('active-btn');
     $('#pendTaskTab').removeClass('active-btn');
     $('#completeTaskTab').addClass('active-btn');
+     $('#notStartedTaskTab').removeClass('active-btn');
     getPendorCompleteTask(true);
+})
+$('#notStartedTaskTab').on('click',()=>{
+    $('#allTaskTab').removeClass('active-btn');
+    $('#pendTaskTab').removeClass('active-btn');
+    $('#completeTaskTab').removeClass('active-btn');
+    $('#notStartedTaskTab').addClass('active-btn');
+    getNotStartedTask();
 })
 
 $('#logoutBtn').on('click', async ()=>{
@@ -496,14 +593,36 @@ async function restoreTask(id) {
      else if(completedTaskTab){
         getPendorCompleteTask(true)
      }
-     else{
+     else if(pendingTaskTab){
         getPendorCompleteTask(false)
+     }
+     else{
+        getNotStartedTask()
      }
     } catch (error) {
         console.log(error)
     }
 
     
+}
+
+async function startTask(id){
+    try {
+        const response = await fetch(`${API}/tasks/${id}`,{
+        method:'PATCH',
+        headers:{
+            'Content-type':'application/json'
+        },
+        body: JSON.stringify({
+            started:true
+        })
+    })
+  toastr.info('Task Started')
+  getTaskCount();
+  getNotStartedTask();
+} catch (error) {
+        
+    }
 }
 
 $('#user').on('click',async ()=>{
@@ -521,6 +640,7 @@ $('#user').on('click',async ()=>{
         
     }
 })
+
 
 getTaskCount();
 getAllTask();
