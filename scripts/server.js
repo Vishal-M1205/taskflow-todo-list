@@ -6,6 +6,10 @@ const userId = localStorage.getItem('userId')
 
 const taskList = document.getElementById('taskList')
 
+const editModal = new bootstrap.Modal(
+    document.getElementById('editTaskModal')
+)
+
 toastr.options = {
         "positionClass": "toast-bottom-right",
         "showDuration": "300",
@@ -16,9 +20,12 @@ function isOverdue(dueDate, completed){
 
     if(completed) return false;
     const today = new Date();
-    const taskDueDate = new Date(dueDate);
+    console.log(today)
+    const [month, day, year] = dueDate.split('/');
+    const taskDueDate = new Date(year, month - 1, day);
     today.setHours(0,0,0,0);
     taskDueDate.setHours(0,0,0,0);
+    console.log(taskDueDate < today)
     return taskDueDate < today;
 }
 
@@ -305,6 +312,7 @@ async function undoTask(id){
 }
 
 async function updateTask(id){
+    
     try {
         const response = await fetch(`${API}/tasks/${id}`)
         const data = await response.json();
@@ -314,7 +322,15 @@ async function updateTask(id){
         $('#updateTaskDate').val(data.dueDate);
         console.log(data);
         $('#updateTaskBtn').off('click').on('click',async ()=>{
-            const updateResponse = await fetch(`${API}/tasks/${id}`,{
+            const sweetResponse = await  Swal.fire({
+        title: 'Do you want to update this task?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33'
+    })
+    if(!sweetResponse.isConfirmed) return;
+    const updateResponse = await fetch(`${API}/tasks/${id}`,{
                 method:'PATCH',
                 headers:{
                     'Content-type':'application/json'
@@ -326,6 +342,7 @@ async function updateTask(id){
                     dueDate:$('#updateTaskDate').val()
                 })
             })
+            editModal.hide();
             getTaskCount();
      if(allTaskTab){
         getAllTask()
@@ -346,6 +363,14 @@ async function updateTask(id){
 }
 
 async function deleteTask(id){
+    const sweetResponse = await  Swal.fire({
+        title: 'Are you sure you want to delete this task?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33'
+    })
+    if(!sweetResponse.isConfirmed) return;
     try {
          const response = await fetch(`${API}/tasks/${id}`,{
         method:"PATCH",
@@ -405,11 +430,19 @@ $('#completeTaskTab').on('click',()=>{
     getPendorCompleteTask(true);
 })
 
-$('#logoutBtn').on('click',()=>{
-    localStorage.clear();
-    setTimeout(()=>{
-  window.location.replace('./index.html')
-    },1500)
+$('#logoutBtn').on('click', async ()=>{
+  const response = await   Swal.fire({
+    title: 'Are you sure you want to logout?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33'
+    })
+    if(response.isConfirmed){
+            localStorage.clear();
+             window.location.replace('./index.html')
+    }
+
 })
 
 $('#restoreTask').on('click',()=>{

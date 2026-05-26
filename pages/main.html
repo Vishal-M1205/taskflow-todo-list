@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body data-theme="light">
       <nav class="navbar navbar-expand-lg   shadow-sm sticky-top top-0" id="navBar">
@@ -174,13 +177,15 @@
                        <input type="text" name="addtaskTitle" id="addtaskTitle" class="form-control text-theme-primary"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);" >
                        <label for="addTaskDesc" class="text-theme-secondary">Description</label>
                        <textarea class="form-control text-theme-primary" name="addTaskDesc" id="addTaskDesc"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);"></textarea>
+                       
+                     
+                       <label for="addTaskDueDate" class="text-theme-secondary">Due date</label>
+                       <input type="text" name="addTaskDueDate" id="addTaskDueDate" class="text-theme-primary form-control"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
                        <label for="addTaskPrior" class="text-theme-secondary">Set Priority</label>
-                       <select class="form-select text-theme-primary"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);" name="addTaskPrior" id="addTaskPrior">
+                         <select class="form-select text-theme-primary"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);" name="addTaskPrior" id="addTaskPrior">
                         <option value="high" class="text-theme-primary  modal-theme ">High Priority</option>
                         <option value="low" class="text-theme-primary modal-theme form">Low Priority</option>
                        </select>
-                       <label for="addTaskDueDate" class="text-theme-secondary">Due date</label>
-                       <input type="date" name="addTaskDueDate" id="addTaskDueDate" class="text-theme-primary form-control"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
                   </div>
                   <div class="modal-footer">
                        <button type="button" class="btn text-white" data-bs-dismiss="modal" id="addTaskBtn">Add Task</button>
@@ -193,6 +198,7 @@
           <button class="btn  active-btn fw-bold text-theme-primary" id="allTaskTab">All</button>
           <button class="btn fw-bold text-theme-primary" id="pendTaskTab">Pending</button>
           <button class="btn fw-bold text-theme-primary" id="completeTaskTab">Completed</button>
+          <button class="btn fw-bold text-theme-primary" id="notStartedTaskTab">Not Started</button>
         </div>
          <div class="modal fade" id="editTaskModal">
               <div class="modal-dialog modal-dialog-centered">
@@ -207,17 +213,19 @@
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
                        <label for="addTaskDesc" class="form-label text-theme-secondary">Description</label>
                        <textarea class="form-control text-theme-primary" name="updateTaskDesc" id="updateTaskDesc"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);"></textarea>
-                       <label for="updateTaskPrior" class="form-label text-theme-secondary">Set Priority</label>
-                       <select class="form-select text-theme-primary" name="updateTaskPrior" id="updateTaskPrior"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
+                       
+                       
+                      <label for="updateTaskDate" class="form-label text-theme-secondary">Due Date</label>
+                      <input type="text" name="updateTaskDate" id="updateTaskDate" class="form-control text-theme-primary" style="height: 50px; background-color: rgba(128, 128, 128, 0.149);" >
+                      <label for="updateTaskPrior" class="form-label text-theme-secondary">Set Priority</label>
+                      <select class="form-select text-theme-primary" name="updateTaskPrior" id="updateTaskPrior"     style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
                         <option value="high" class="text-theme-primary">High Priority</option>
                         <option value="low" class="text-theme-primary">Low Priority</option>
                        </select>
-                      <label for="updateTaskDate" class="form-label text-theme-secondary">Due Date</label>
-                      <input type="date" name="updateTaskDate" id="updateTaskDate" class="form-control text-theme-primary" style="height: 50px; background-color: rgba(128, 128, 128, 0.149);" >
 
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="updateTaskBtn" >Update Task</button>
+                      <button type="button" class="btn btn-primary"  id="updateTaskBtn" >Update Task</button>
                   </div>
                </div>
               </div>
@@ -229,6 +237,16 @@
         
         </div>
     </section>
+    <script>
+      $('#updateTaskDate').datepicker({
+       format: "mm-dd-yy",
+        minDate: 0
+      });
+       $('#addTaskDueDate').datepicker({
+        format: "mm-dd-yy",
+        minDate: 0
+      });
+    </script>
     <script src="../scripts/server.js"></script>
 </body>
 </html>
