@@ -147,6 +147,10 @@
               <label for="email" class="form-label fs-5 lead mt-3 text-theme-secondary">Email</label>
               <input type="text text-theme-primary" name="email" id="email" class="form-control " placeholder="Enter your mail id.."
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
+               <label for="mob" class="form-label fs-5 lead mt-3 text-theme-secondary">Mobile No.</label>
+               <input type="tel" name="mob" id="mob" class="form-control " placeholder="Enter your Mobile No."
+              style="height: 50px; background-color: rgba(128, 128, 128, 0.149);" maxlength='10' pattern="[0-9]{10}"
+               >
               <label for="pass" class="form-label fs-5 lead mt-3 text-theme-secondary">Password</label>
               <input type="password text-theme-primary" name="pass" id="pass" class="form-control " placeholder="Enter your password"
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
@@ -164,10 +168,39 @@
                 <textarea name="addr" id="addr" class="form-control text-theme-primary"  style="background-color: rgba(128, 128, 128, 0.149);"></textarea>
               <label for="role" class="form-label fs-5 lead mt-3 d-block text-theme-secondary">Role</label>
               <select name="role" id="role" class="form-control text-theme-primary" style="background-color: rgba(128, 128, 128, 0.149);">
-                <option value="prefer not to say">Prefer not to say</option>
+                <option value="prefer not to say">Others</option>
                 <option value="student" class="text-theme-primary">Student</option>
                 <option value="working" class="text-theme-primary">Working Professional</option>
               </select>
+              <label for="role" class="form-label fs-5 lead mt-3 d-block text-theme-secondary">Skills</label>
+              <div class="row g-2">
+                   <div class="col-4 d-flex gap-1">
+                     <label for="c++" class="text-theme-primary
+              form-label fs-6 fw-semibold ">C++</label>
+              <input type="checkbox" name="skills" id="c++" value="C++" class="form-check form-check-input">
+                   </div>
+                   <div class="col-4 d-flex gap-1">
+                    <label for="c++" class="text-theme-primary
+              form-label fs-6 fw-semibold ">Javascript</label>
+              <input type="checkbox" name="skills" id="js" class="form-check form-check-input form-check-inline">
+                   </div>
+                   <div class="col-4 d-flex gap-1">
+                 <label for="c++" class="text-theme-primary
+              form-label fs-6 fw-semibold ">HTML</label>
+              <input type="checkbox" name="skills" id="html" class="form-check form-check-input form-check-inline">
+                   </div>
+                   <div class="col-4 d-flex gap-1">
+                  <label for="c++" class="text-theme-primary
+              form-label fs-6 fw-semibold ">CSS</label>
+              <input type="checkbox" name="skills" id="css" class="form-check form-check-input form-check-inline">
+                   </div>
+                   <div class="col-4 d-flex gap-1">
+                    <label for="c++" class="text-theme-primary
+              form-label fs-6 fw-semibold ">Jquery</label>
+              <input type="checkbox" name="skills" id="jq" class="form-check form-check-input form-check-inline">
+              </div>
+              </div>    
+             
            </div>
             <div class="modal-footer "> 
          <button class="btn btn-primary w-100 fs-4 fw-semibold" id="register">Get Started</button>

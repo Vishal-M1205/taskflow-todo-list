@@ -71,8 +71,22 @@ function toggleTheme(){
          }
       })
         $('#register').on('click', async function(){
-          console.log()
+          
+
+    let selected = [];
+
+    $("input[name='skills']:checked").each(function () {
+        selected.push($(this).val());
+    });
+
+    console.log(selected);
+
           let isValid = true;
+         if(!nameValidate($('#name').val())&&!emailValidate($('#email').val())&&!passValidate($('#pass').val())){
+             isValid = false;
+             toastr.warning("Empty Values not allowed")
+             return
+         }
          if(!nameValidate($('#name').val())){
             isValid = false;
              toastr.warning("Invalid name")
@@ -86,6 +100,11 @@ function toggleTheme(){
          if(!passValidate($('#pass').val())){
           isValid = false;
           toastr.warning("Invalid password password must contain 8-15 characters, at least one uppercase letter, one lowercase letter, one number and one special character")
+          return
+         }
+         if(!$('#mob').val()){
+          isValid = false;
+          toastr.warning("Invalid Phone Number");
           return
          }
          if($('#pass').val() !== $('#cpass').val()){
@@ -109,6 +128,12 @@ function toggleTheme(){
           return
          }
          
+         if(selected.length == 0){
+          isValid = false;
+          toastr.warning("Select atleast one skill");
+          return
+         }
+         
          if(isValid){
               try {
                 
@@ -126,10 +151,12 @@ function toggleTheme(){
                 body:JSON.stringify({
                   name: $('#name').val(),
                   email : $('#email').val(),
+                  mobile: $('#mob'.val()),
                   password: $('#pass').val(),
                   dob:$('#dob').val(),
                   gender: $('#male').prop('checked')?'male':'female',
-                  address: $('#addr').val()
+                  address: $('#addr').val(),
+                  skills:selected
                 })
               })
            
