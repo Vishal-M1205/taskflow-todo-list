@@ -9,6 +9,19 @@ const taskList = document.getElementById('taskList')
 const editModal = new bootstrap.Modal(
     document.getElementById('editTaskModal')
 )
+const addModal = new bootstrap.Modal(
+    document.getElementById('addTaskModal')
+)
+
+async function getUserName(){
+    const response = await fetch(`${API}/users/${userId}`)
+    const data = await response.json()
+    let name = data.name;
+   name = name.split(' ')
+    $('#usersName').text(name[0])
+}
+getUserName();
+
 
 toastr.options = {
         "positionClass": "toast-bottom-right",
@@ -476,7 +489,10 @@ async function deleteTask(id){
 }
 
 $('#addTaskBtn').on('click',  async ()=>{
-  
+  if(!$('#addtaskTitle').val() || !$('#addTaskDesc').val() || !$('#addTaskDueDate').val()) {
+    toastr.error('Please fill all the fields')
+    return;
+  }
   const response =await addTask();
   toastr.success(response)
   if(allTaskTab){
@@ -492,6 +508,7 @@ $('#addTaskBtn').on('click',  async ()=>{
         getNotStartedTask()
      }
   getTaskCount()
+  addModal.hide();
   $('#addtaskTitle').val("");
   $('#addTaskDesc').val("");
 })

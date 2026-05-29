@@ -71,6 +71,18 @@
       "deleted": false,
       "started": false,
       "id": "AqpbnlPeuCM"
+    },
+    {
+      "title": "Eat",
+      "description": "eggs",
+      "priority": "high",
+      "completed": false,
+      "createdAt": "29/4/2026",
+      "dueDate": "05/31/2026",
+      "userId": "P72OEYvOBzE",
+      "deleted": false,
+      "started": false,
+      "id": "fWYS5J3ivNI"
     }
   ],
   "users": [
@@ -100,6 +112,20 @@
       "gender": "male",
       "address": "seeli",
       "id": "NcMsroA53O8"
+    },
+    {
+      "name": "Vis",
+      "email": "vishak.123@gmail.com",
+      "mobile": "6379543139",
+      "password": "Vishal@1205",
+      "dob": "05/02/2012",
+      "gender": "male",
+      "address": "2/201 B\nAnnapoorani Nagar, Theethi Palayam",
+      "skills": [
+        "C++",
+        "on"
+      ],
+      "id": "hk3IuLfbJ3M"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

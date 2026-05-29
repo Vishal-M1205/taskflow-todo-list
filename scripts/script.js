@@ -38,6 +38,61 @@ function toggleTheme(){
  const nameValidate = function (input){
   return nameRegex.test(input)
  }
+
+$('#pass').on('input',()=>{
+  if(!passValidate($('#pass').val())){
+          $('#passErrMsg').text('Password must contain 8-15 characters, at least one uppercase letter, one lowercase letter, one number and one special character')
+          $('#passErrMsg').addClass('text-danger');
+          $('#passErrMsg').removeClass('text-success');
+         }
+      else{
+        $('#passErrMsg').text('Valid Password')
+         $('#passErrMsg').addClass('text-success');
+          $('#passErrMsg').removeClass('text-danger');
+      }
+})
+
+$('#signupModal input, #signupModal textarea,#signupModal select').on('input change',()=>{
+  let signupVal = {
+    fullName : $('#name').val(),
+    email: $('#email').val(),
+    mobno : $('#mob').val(),
+    pass: $('#pass').val(),
+    dob : $('#dob').val(),
+    gender: $('#male').prop('checked')?'male':'female',
+    addr : $('#addr').val(),
+    role : $('#role').val(),
+    skills: $('input[name="skills"]:checked').map(function (){
+     return $(this).attr('id')
+    }).get()
+  }
+  localStorage.setItem('signupVal',JSON.stringify(signupVal))
+  const value = JSON.parse(localStorage.getItem('signupVal'))
+  console.log(value)
+
+})
+
+function signupModal(){
+  const signupVal = JSON.parse(localStorage.getItem('signupVal'))
+  console.log(signupVal)
+  if(signupVal){
+     $('#name').val(signupVal.fullName)
+     $('#email').val(signupVal.email)
+     $('#pass').val(signupVal.pass)
+     $('#mob').val(signupVal.mobno)
+     $('#dob').val(signupVal.dob)
+     signupVal.gender == 'male'?$('#male').prop('checked',true):$('#female').prop('checked',true)
+    $('#addr').val(signupVal.addr)
+    $('#role').val(signupVal.role)
+    const skills = signupVal.skills
+    console.log(skills)
+    console.log(skills.forEach((element )=> {
+      $(`#${element}`).prop('checked',true)
+    }))
+  }
+}
+signupModal();
+
  $('#sign-in').on('click',async function(){
         let isValid = true;
 
@@ -99,7 +154,7 @@ function toggleTheme(){
          }
          if(!passValidate($('#pass').val())){
           isValid = false;
-          toastr.warning("Invalid password password must contain 8-15 characters, at least one uppercase letter, one lowercase letter, one number and one special character")
+          toastr.warning("Invalid password, password must contain 8-15 characters, at least one uppercase letter, one lowercase letter, one number and one special character")
           return
          }
          if(!$('#mob').val()){
@@ -151,7 +206,7 @@ function toggleTheme(){
                 body:JSON.stringify({
                   name: $('#name').val(),
                   email : $('#email').val(),
-                  mobile: $('#mob'.val()),
+                  mobile: $('#mob').val(),
                   password: $('#pass').val(),
                   dob:$('#dob').val(),
                   gender: $('#male').prop('checked')?'male':'female',
@@ -174,6 +229,7 @@ function toggleTheme(){
               $('#male').prop('checked',false);
               $('#female').prop('checked',false);
               $('#addr').val("");
+              localStorage.removeItem('signupVal')
                 }
               } catch (error) {
                 console.log(error)

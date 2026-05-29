@@ -215,7 +215,7 @@ body{
 }
 .start-btn{
     transition: all 0.4s;
-}
+} 
 .start-btn:hover{
     
     transform: scale(1.1);
