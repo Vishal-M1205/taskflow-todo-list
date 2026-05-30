@@ -2,13 +2,25 @@ const API = 'http://localhost:5000'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,4}$/;
 const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,15}$/
-const nameRegex = /^[a-zA-Z\s]+$/
+const nameRegex = /^[a-zA-Z\s]{3,}$/
+const mobileRegex = /^[0-9]{10}$/
 toastr.options = {
         "positionClass": "toast-bottom-right",
         "showDuration": "300",
         "preventDuplicates": true
       }
-    
+
+if(localStorage.getItem('theme')=='light'){
+    $('#themeBtn').removeClass('bi-sun-fill')
+        $('#themeBtn').addClass('bi-moon-fill')
+        document.body.setAttribute("data-theme", "light");
+}
+else{
+        $('#themeBtn').addClass('bi-sun-fill')
+        $('#themeBtn').removeClass('bi-moon-fill')
+        document.body.setAttribute("data-theme", "dark");
+}
+
 function toggleTheme(){
   const currentTheme = document.body.getAttribute("data-theme");
 
@@ -17,14 +29,14 @@ function toggleTheme(){
         $('#themeBtn').removeClass('bi-sun-fill')
         $('#themeBtn').addClass('bi-moon-fill')
         document.body.setAttribute("data-theme", "light");
-
+        localStorage.setItem('theme','light')
         
     }
     else{
       $('#themeBtn').addClass('bi-sun-fill')
         $('#themeBtn').removeClass('bi-moon-fill')
         document.body.setAttribute("data-theme", "dark");
-
+       localStorage.setItem('theme','dark')
        
     }
 }
@@ -38,26 +50,79 @@ function toggleTheme(){
  const nameValidate = function (input){
   return nameRegex.test(input)
  }
+const mobileValidate = function (input){
+ return mobileRegex.test(input)
+}
 
-$('#pass').on('input',()=>{
-  if(!passValidate($('#pass').val())){
-          $('#passErrMsg').text('Password must contain 8-15 characters, at least one uppercase letter, one lowercase letter, one number and one special character')
-          $('#passErrMsg').addClass('text-danger');
-          $('#passErrMsg').removeClass('text-success');
+const addInValidClass = function (msg,eleID,msgID){
+  $(msgID).text(msg)
+   $(eleID).addClass('is-invalid')
+          $(eleID).removeClass('is-valid')
+
+          $(msgID).addClass('invalid-feedback');
+          $(msgID).removeClass('valid-feedback');
+} 
+
+const addValidClass = function(msg,eleID,msgID){
+   $(msgID).text(msg)
+   $(eleID).addClass('is-valid')
+       $(eleID).removeClass('is-invalid')
+        $(msgID).addClass('valid-feedback');
+          $(msgID).removeClass('invalid-feedback');
+}
+
+
+
+
+$('#name').on('input',()=>{
+   if(!nameValidate($('#name').val())){
+          addInValidClass('Invlaid name, atleast 3 letters required','#name','#nameErrMsg')
          }
       else{
-        $('#passErrMsg').text('Valid Password')
-         $('#passErrMsg').addClass('text-success');
-          $('#passErrMsg').removeClass('text-danger');
+          addValidClass('Looks Good!','#name','#nameErrMsg')
       }
 })
+$('#email').on('input',()=>{
+   if(!emailValidate($('#email').val())){
+          addInValidClass('Invlaid email','#email','#emailErrMsg')
+         }
+      else{
+          addValidClass('Looks Good!','#email','#emailErrMsg')
+      }
+})
+$('#mob').on('input',()=>{
+   if(!mobileValidate($('#mob').val())){
+          addInValidClass('Invlaid number','#mob','#mobErrMsg')
+         }
+      else{
+          addValidClass('Looks Good!','#mob','#mobErrMsg')
+      }
+})
+$('#cpass').on('input',()=>{
+   if(!($('#cpass').val()==$('#pass').val())){
+         addInValidClass("Password didn't match",'#cpass','#cpassErrMsg')
+         }
+      else{
+        addValidClass("Password Matched",'#cpass','#cpassErrMsg')
+      }
+})
+$('#pass').on('input',()=>{
+   if(!passValidate($('#pass').val())){
+         addInValidClass("Password must have 8-15 characters, one uppercase, one lowercase, one number and one special character",'#pass','#passErrMsg')
+         }
+      else{
+        addValidClass("Valid Password",'#pass','#passErrMsg')
+      }
+})
+
+
 
 $('#signupModal input, #signupModal textarea,#signupModal select').on('input change',()=>{
   let signupVal = {
     fullName : $('#name').val(),
     email: $('#email').val(),
     mobno : $('#mob').val(),
-    pass: $('#pass').val(),
+    
     dob : $('#dob').val(),
     gender: $('#male').prop('checked')?'male':'female',
     addr : $('#addr').val(),
@@ -93,6 +158,17 @@ function signupModal(){
 }
 signupModal();
 
+$('#loginEmail').on('input',()=>{
+   if(!emailValidate($('#loginEmail').val())){
+          addInValidClass('Invlaid email','#loginEmail','#loginEmailErrMsg')
+         }
+      else{
+          addValidClass('Looks Good!','#loginEmail','#loginEmailErrMsg')
+      }
+})
+
+
+
  $('#sign-in').on('click',async function(){
         let isValid = true;
 
@@ -118,7 +194,7 @@ signupModal();
                     },1500)
                     
                 }
-                else{
+                else{ 
                   toastr.error('Invalid Email or Password')
                 }
 

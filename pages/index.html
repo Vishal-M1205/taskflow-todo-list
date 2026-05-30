@@ -123,9 +123,11 @@
               <label for="loginEmail" class="form-label fs-5 lead text-theme-secondary"><span class="text-danger">*</span>Email</label>
               <input type="text" name="loginEmail" id="loginEmail" class="form-control text-theme-primary" placeholder="Enter your mail id.."
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
+              <span id="loginEmailErrMsg"></span>
               <label for="loginPass" class="form-label fs-5 lead mt-3 text-theme-secondary"><span class="text-danger">*</span>Password</label>
               <input type="text" name="loginPass" id="loginPass" class="form-control text-theme-primary" placeholder="Enter your password"
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
+             
               
          </div>
          <div class="modal-footer "> 
@@ -147,20 +149,25 @@
               <label for="name" class="form-label fs-5 lead text-theme-secondary"><span class="text-danger">*</span>Full Name</label>
               <input type="text" name="name" id="name" class="form-control text-theme-primary" placeholder="Enter your name.."
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
+              <span id="nameErrMsg"></span>
               <label for="email" class="form-label fs-5 lead mt-3 text-theme-secondary"><span class="text-danger">*</span>Email</label>
               <input type="text text-theme-primary" name="email" id="email" class="form-control " placeholder="Enter your mail id.."
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
+              <span id="emailErrMsg"></span>
+
                <label for="mob" class="form-label fs-5 lead mt-3 text-theme-secondary"><span class="text-danger">*</span>Mobile No.</label>
                <input type="tel" name="mob" id="mob" class="form-control " placeholder="Enter your Mobile No."
-              style="height: 50px; background-color: rgba(128, 128, 128, 0.149);" maxlength='10' pattern="[0-9]{10}"
-               >
+              style="height: 50px; background-color: rgba(128, 128, 128, 0.149);" maxlength='10' >
+              <span id="mobErrMsg"></span>
               <label for="pass" class="form-label fs-5 lead mt-3 text-theme-secondary"><span class="text-danger">*</span>Password</label>
               <input type="password text-theme-primary" name="pass" id="pass" class="form-control " placeholder="Enter your password"
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
-              <p  id="passErrMsg"></p>
+              <span  id="passErrMsg" ></span>
               <label for="cpass" class="form-label fs-5 lead mt-3 text-theme-secondary"><span class="text-danger">*</span>Confirm Password</label>
               <input type="password text-theme-primary" name="cpass" id="cpass" class="form-control" placeholder="Confirm your password"
               style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
+              <span id="cpassErrMsg"></span>
+
               <label for="dob" class="form-label fs-5 lead mt-3 text-theme-secondary"><span class="text-danger">*</span>Date of Birth</label>
               <input type="text" name="dob" id="dob" class="form-control text-theme-primary"  style="height: 50px; background-color: rgba(128, 128, 128, 0.149);">
               <label for="gen" class="form-label fs-5 lead mt-3 d-block text-theme-secondary"><span class="text-danger">*</span>Gender</label>

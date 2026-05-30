@@ -13,6 +13,16 @@ const addModal = new bootstrap.Modal(
     document.getElementById('addTaskModal')
 )
 
+if(localStorage.getItem('theme')=='light'){
+    $('#themeBtn').removeClass('bi-sun-fill')
+        $('#themeBtn').addClass('bi-moon-fill')
+        document.body.setAttribute("data-theme", "light");
+}
+else{
+        $('#themeBtn').addClass('bi-sun-fill')
+        $('#themeBtn').removeClass('bi-moon-fill')
+        document.body.setAttribute("data-theme", "dark");
+}
 async function getUserName(){
     const response = await fetch(`${API}/users/${userId}`)
     const data = await response.json()
@@ -42,6 +52,21 @@ function isOverdue(dueDate, completed){
     return taskDueDate < today;
 }
 
+function refreshTab(){
+    if(allTaskTab){
+        getAllTask()
+     }
+     else if(completedTaskTab){
+        getPendorCompleteTask(true)
+     }
+     else if(pendingTaskTab){
+        getPendorCompleteTask(false)
+     }
+     else{
+        getNotStartedTask()
+     }
+}
+
 function toggleTheme(){
   const currentTheme = document.body.getAttribute("data-theme");
 
@@ -50,6 +75,7 @@ function toggleTheme(){
         $('#themeBtn').removeClass('bi-sun-fill')
         $('#themeBtn').addClass('bi-moon-fill')
         document.body.setAttribute("data-theme", "light");
+        localStorage.setItem('theme','light')
 
         
     }
@@ -57,7 +83,7 @@ function toggleTheme(){
       $('#themeBtn').addClass('bi-sun-fill')
         $('#themeBtn').removeClass('bi-moon-fill')
         document.body.setAttribute("data-theme", "dark");
-
+        localStorage.setItem('theme','dark')
        
     }
 }
@@ -427,18 +453,7 @@ async function updateTask(id){
             })
             editModal.hide();
             getTaskCount();
-     if(allTaskTab){
-        getAllTask()
-     }
-     else if(completedTaskTab){
-        getPendorCompleteTask(true)
-     }
-     else if(pendingTaskTab){
-        getPendorCompleteTask(false)
-     }
-     else{
-        getNotStartedTask()
-     }
+           refreshTab()
       toastr.success('Updated Successfully')
      })
    
@@ -469,18 +484,7 @@ async function deleteTask(id){
     })
     console.log(response)
     getTaskCount();
-     if(allTaskTab){
-        getAllTask()
-     }
-     else if(completedTaskTab){
-        getPendorCompleteTask(true)
-     }
-     else if(pendingTaskTab){
-        getPendorCompleteTask(false)
-     }
-     else{
-        getNotStartedTask()
-     }
+     refreshTab()
      toastr.error('Task Deleted')
     } catch (error) {
          console.log(error)
@@ -495,18 +499,7 @@ $('#addTaskBtn').on('click',  async ()=>{
   }
   const response =await addTask();
   toastr.success(response)
-  if(allTaskTab){
-        getAllTask()
-     }
-     else if(completedTaskTab){
-        getPendorCompleteTask(true)
-     }
-     else if(pendingTaskTab){
-        getPendorCompleteTask(false)
-     }
-     else{
-        getNotStartedTask()
-     }
+  refreshTab()
   getTaskCount()
   addModal.hide();
   $('#addtaskTitle').val("");
@@ -553,7 +546,7 @@ $('#logoutBtn').on('click', async ()=>{
     cancelButtonColor: '#d33'
     })
     if(response.isConfirmed){
-            localStorage.clear();
+            localStorage.removeItem('userId');
              window.location.replace('./index.html')
     }
 
@@ -604,18 +597,7 @@ async function restoreTask(id) {
     toastr.warning('Task Restored')
     restoreTaskListModal();
     getTaskCount();
-     if(allTaskTab){
-        getAllTask()
-     }
-     else if(completedTaskTab){
-        getPendorCompleteTask(true)
-     }
-     else if(pendingTaskTab){
-        getPendorCompleteTask(false)
-     }
-     else{
-        getNotStartedTask()
-     }
+     refreshTab()
     } catch (error) {
         console.log(error)
     }
