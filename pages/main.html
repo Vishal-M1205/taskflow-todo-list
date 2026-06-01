@@ -81,9 +81,9 @@
              
           
        </div>
-    <section class="container mt-5">
-  <div class="row g-2">
-    <div class="col-lg-3 ">
+    <section class="container mt-5" style="width: 1200px;">
+  <div class="row g-2 ">
+    <div class="col-lg-3 " >
            <div class="card rounded-4">
                       <div class="card-body ">
                         <div class="d-flex justify-content-between align-items-center ">
@@ -163,13 +163,43 @@
     
   </div>
     </section>
-    <section class="container py-4 px-3 d-flex flex-column gap-2 mt-5  rounded-5 bg-theme" style="border: 1px solid rgb(100, 63, 160);">
+    <section class="container py-4 px-3 d-flex flex-column gap-2 mt-5  rounded-5 bg-theme" style="border: 1px solid rgb(100, 63, 160); width: 1200px;">
 
       <div class="d-flex justify-content-between">
          <h3 class="fw-bold text-theme-primary">My Tasks</h3>
-         <div>
+         <div >  
+               
+                 <div class="btn-group">
+                   <button class="btn  violet-button fw-bold" id="filterTask" data-bs-toggle="modal" data-bs-target="#filterTaskModal">Filter Task</button>
+                   <button class="btn  btn-danger">X</button>
+                 </div>
                  <button class="btn  violet-button fw-bold" id="restoreTask" data-bs-toggle="modal" data-bs-target="#restoreTaskModal">Restore Task</button>
                   <button class="btn text-light fw-bold" id="addTask" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task +</button>
+         </div>
+         <div class="modal fade" id="filterTaskModal">
+           <div class="modal-dialog modal-sm">
+             <div class="modal-content">
+                 <div class="modal-header">
+                   Select the date to filter
+                   <button class="btn btn-clos" data-bs-dismiss="modal"></button>
+                 </div>
+                 <div class="modal-body">
+                  <div class="input-group py-2">
+                       <span class="input-group-text">From</span>
+                       <input type="text" class="form-control" id="filterFromDate">
+                  </div>
+                     <div class="input-group">
+                              <span class="input-group-text px-4">To</span>
+                               <input type="text"  class="z-1 form-control" id="filterToDate">
+                     </div>
+                    
+                 </div>
+                 <div class="modal-footer">
+                  <button class="btn btn-primary" id="submitFilterDate">Submit</button>
+                 </div>
+             </div>
+
+           </div>
          </div>
          <div class="modal fade" id="restoreTaskModal">
               <div class="modal-dialog modal-dialog-centered">
@@ -250,7 +280,7 @@
               </div>
          </div>
        
-        <div id="taskList" class="container d-flex flex-column gap-3">
+        <div id="taskList" class="container row d-flex flex-column gap-3">
         
           
         
@@ -258,13 +288,19 @@
     </section>
     <script>
       $('#updateTaskDate').datepicker({
-       format: "mm-dd-yy",
+       dateFormat: "yy-mm-dd",
         minDate: 0
       });
        $('#addTaskDueDate').datepicker({
-        format: "mm-dd-yy",
+        dateFormat: "yy-mm-dd",
         minDate: 0
       });
+        $('#filterFromDate').datepicker({
+          dateFormat: "yy-mm-dd"
+        })
+        $('#filterToDate').datepicker({
+          dateFormat: "yy-mm-dd"
+        })
     </script>
     <script src="../scripts/server.js"></script>
 </body>

@@ -44,7 +44,7 @@ function isOverdue(dueDate, completed){
     if(completed) return false;
     const today = new Date();
     console.log(today)
-    const [month, day, year] = dueDate.split('/');
+    const [year, month, day] = dueDate.split('-');
     const taskDueDate = new Date(year, month - 1, day);
     today.setHours(0,0,0,0);
     taskDueDate.setHours(0,0,0,0);
@@ -110,7 +110,7 @@ async function addTask(){
             description:desc,
             priority: priority,
             completed:false,
-            createdAt : `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
+            createdAt : `${date.toISOString().split('T')[0]}`,
             dueDate : dueDate,
             userId : userId,
             deleted:false,
@@ -129,7 +129,7 @@ async function addTask(){
 async function getAllTask() {
     try {
     console.log(userId)
-    const response = await fetch(`${API}/tasks?userId=${userId}&deleted=false&started=true`) 
+    const response = await fetch(`${API}/tasks?userId=${userId}&deleted=false&started=true&_sort=-createdAt`) 
     const data = await response.json()
     console.log(data)
     taskList.replaceChildren();
@@ -211,7 +211,7 @@ async function getPendorCompleteTask(val){
             allTaskTab = false;
             notStartedTaskTab = false;
         }
-    const response = await fetch(`${API}/tasks?completed=${val}&userId=${userId}&deleted=false&started=true`) 
+    const response = await fetch(`${API}/tasks?completed=${val}&userId=${userId}&deleted=false&started=true&_sort=-createdAt`) 
     const data = await response.json()
     console.log(data)
     taskList.replaceChildren();
@@ -282,12 +282,13 @@ async function getNotStartedTask(){
     pendingTaskTab = false;
     allTaskTab = false;
     notStartedTaskTab = true;
-    const response = await fetch(`${API}/tasks?started=false&userId=${userId}&deleted=false`)
+    const response = await fetch(`${API}/tasks?started=false&userId=${userId}&deleted=false&_sort=-createdAt`)
     const data = await response.json();
     console.log(data);
         taskList.replaceChildren();
         data.forEach(task => {
          const div = document.createElement('div');
+         
      div.innerHTML = ` <div class="card  rounded-4 shadow-sm">
             <div class="card-body d-flex justify-content-between">
                   <div class="${task.completed?"completed-text":""}">

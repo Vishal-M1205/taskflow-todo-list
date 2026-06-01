@@ -290,3 +290,6 @@ body{
     font-size: 14px;
 }
 
+.ui-datepicker{
+    z-index: 9999 !important;
+}
