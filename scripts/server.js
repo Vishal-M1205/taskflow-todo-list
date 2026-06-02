@@ -23,6 +23,16 @@ else{
         $('#themeBtn').removeClass('bi-moon-fill')
         document.body.setAttribute("data-theme", "dark");
 }
+
+ function formatDate(dateFormat){
+    console.log(dateFormat)
+    const [year,month,date]  = dateFormat.split('-')
+    let newdate = new Date(year,month-1,date)
+     newdate = newdate.toDateString()
+     newdate = newdate.split(' ')
+    return `${newdate[0]}, ${newdate[1]} ${newdate[2]},${newdate[3]}`
+ }
+
 let fromDate = null;
 let toDate = null;
 $('#submitFilterDate').on('click',()=>{
@@ -162,17 +172,17 @@ async function getAllTask() {
                        <p>${task.description}</p>
                        <p class="text-secondary mb-1">
         <i class="bi bi-calendar-event"></i>
-        Created: ${task.createdAt}
+        Created: ${formatDate(task.createdAt)}
     </p>
      <p class="text-secondary mb-2">
         <i class="bi bi-calendar2-check"></i>
-        Due: ${task.dueDate}
+        Due: ${formatDate(task.dueDate)}
     </p>
                        <span class="${task.completed?"completed":"pending"}"><i class="bi ${task.completed?"bi-check-circle":"bi-clock"}"></i>${task.completed?"Completed":"Pending"}</span>
                          ${
         isOverdue(task.dueDate, task.completed)
         ?
-        `<span class="overdue mb-2">
+        `<span class="overdue mb-2 d-block d-sm-inline my-2 my-sm-0">
             <i class="bi bi-exclamation-circle"></i>
             Overdue
         </span>`
@@ -241,11 +251,11 @@ async function getPendorCompleteTask(val){
                        <p>${task.description}</p>
                        <p class="text-secondary mb-1">
         <i class="bi bi-calendar-event"></i>
-        Created: ${task.createdAt}
+        Created: ${formatDate(task.createdAt)}
     </p>
      <p class="text-secondary mb-2">
         <i class="bi bi-calendar2-check"></i>
-        Due: ${task.dueDate}
+        Due: ${formatDate(task.dueDate)}
     </p>
                        <span class="${task.completed?"completed":"pending"}"><i class="bi ${task.completed?"bi-check-circle":"bi-clock"}"></i>${task.completed?"Completed":"Pending"}</span>
                        ${
@@ -312,11 +322,11 @@ async function getNotStartedTask(){
                        <p>${task.description}</p>
                        <p class="text-secondary mb-1">
         <i class="bi bi-calendar-event"></i>
-        Created: ${task.createdAt}
+        Created: ${formatDate(task.createdAt)}
     </p>
      <p class="text-secondary mb-2">
         <i class="bi bi-calendar2-check"></i>
-        Due: ${task.dueDate}
+        Due: ${formatDate(task.dueDate)}
     </p>
                        <span class="not-started"><i class="bi bi-cone-striped px-1"></i>Not Started</span>
                        ${
@@ -509,6 +519,32 @@ async function deleteTask(id){
    
 }
 
+async function  hardDeleteTask(id){
+    try {
+        const confirm = await Swal.fire({
+    title: 'This will delete the task permanently, ok?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33'
+})
+      if(confirm.isConfirmed){
+          const response = await fetch(`${API}/tasks/${id}`,{
+    method:'DELETE'
+
+})
+ restoreTaskListModal()
+      }
+      else{
+        return;
+      }
+    } catch (error) {
+        
+    }
+
+
+}
+
 $('#addTaskBtn').on('click',  async ()=>{
   if(!$('#addtaskTitle').val() || !$('#addTaskDesc').val() || !$('#addTaskDueDate').val()) {
     toastr.error('Please fill all the fields')
@@ -586,8 +622,9 @@ async function restoreTaskListModal() {
            <div>
            <p class="fs-4 mb-0 text-theme-primary">${task.title}</p>
            </div>
-           <div>
+           <div class="d-flex gap-2">
            <button class="btn border-1 border-warning text-warning" ><i class="bi bi-bootstrap-reboot fs-4" onClick="restoreTask('${task.id}')"></i></button>
+           <button class="btn border-1 border-danger text-danger" ><i class="bi bi-trash fs-4" onClick="hardDeleteTask('${task.id}')"></i></button>
            </div> 
            </div>
            

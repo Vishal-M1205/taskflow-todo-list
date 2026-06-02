@@ -81,7 +81,7 @@
              
           
        </div>
-    <section class="container mt-5" style="width: 1200px;">
+    <section class="container mt-5" id="cardSection">
   <div class="row g-2 ">
     <div class="col-lg-3 " >
            <div class="card rounded-4">
@@ -163,24 +163,24 @@
     
   </div>
     </section>
-    <section class="container py-4 px-3 d-flex flex-column gap-2 mt-5  rounded-5 bg-theme" style="border: 1px solid rgb(100, 63, 160); width: 1200px;">
+    <section class="container py-4 px-3 d-flex flex-column gap-2 mt-5  rounded-5 bg-theme" style="border: 1px solid rgb(100, 63, 160); " id="taskSection">
 
       <div class="d-flex justify-content-between">
          <h3 class="fw-bold text-theme-primary">My Tasks</h3>
-         <div >  
+         <div class="d-flex gap-2">  
                
                  <div class="btn-group">
-                   <button class="btn  violet-button fw-bold" id="filterTask" data-bs-toggle="modal" data-bs-target="#filterTaskModal">Filter Task</button>
-                   <button class="btn btn-outline-danger fw-bold d-none" id="clearFilterBtn">Clear Filter</button>
+                   <button class="btn violet-button fw-bold fs-6 categBtn" id="filterTask" data-bs-toggle="modal" data-bs-target="#filterTaskModal">Filter Task</button>
+                   <button class="btn btn-outline-danger fw-bold d-none categBtn" id="clearFilterBtn">Clear Filter</button>
                  </div>
-                 <button class="btn  violet-button fw-bold" id="restoreTask" data-bs-toggle="modal" data-bs-target="#restoreTaskModal">Restore Task</button>
-                  <button class="btn text-light fw-bold" id="addTask" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task +</button>
+                 <button class="btn  violet-button fw-bold categBtn" id="restoreTask" data-bs-toggle="modal" data-bs-target="#restoreTaskModal">Restore Task</button>
+                  <button class="btn text-light fw-bold categBtn" id="addTask" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task +</button>
          </div>
          <div class="modal fade" id="filterTaskModal">
            <div class="modal-dialog modal-sm">
              <div class="modal-content">
                  <div class="modal-header">
-                   Select the date to filter
+                   Select the created date to filter
                    <button class="btn btn-clos" data-bs-dismiss="modal"></button>
                  </div>
                  <div class="modal-body">

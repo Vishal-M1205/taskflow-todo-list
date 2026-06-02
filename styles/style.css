@@ -293,3 +293,15 @@ body{
 .ui-datepicker{
     z-index: 9999 !important;
 }
+
+@media (min-width : 1200px){
+#cardSection{
+    width: 1200px;
+}
+
+#taskSection{
+     width: 1200px;
+}
+
+}
+
