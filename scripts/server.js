@@ -23,6 +23,22 @@ else{
         $('#themeBtn').removeClass('bi-moon-fill')
         document.body.setAttribute("data-theme", "dark");
 }
+let fromDate = null;
+let toDate = null;
+$('#submitFilterDate').on('click',()=>{
+    fromDate = $('#filterFromDate').val()
+    toDate = $('#filterToDate').val()
+    $('#clearFilterBtn').removeClass('d-none')
+    refreshTab()
+})
+
+$('#clearFilterBtn').on('click',()=>{
+    fromDate = null;
+    toDate = null;
+    $('#clearFilterBtn').addClass('d-none')
+    refreshTab()
+})
+
 async function getUserName(){
     const response = await fetch(`${API}/users/${userId}`)
     const data = await response.json()
@@ -129,7 +145,7 @@ async function addTask(){
 async function getAllTask() {
     try {
     console.log(userId)
-    const response = await fetch(`${API}/tasks?userId=${userId}&deleted=false&started=true&_sort=-createdAt`) 
+    const response = await fetch(`${API}/tasks?userId=${userId}&deleted=false&started=true&_sort=-createdAt&${fromDate?`createdAt_gte=${fromDate}`:''}${toDate?`&createdAt_lte=${toDate}`:''}`) 
     const data = await response.json()
     console.log(data)
     taskList.replaceChildren();
@@ -211,7 +227,7 @@ async function getPendorCompleteTask(val){
             allTaskTab = false;
             notStartedTaskTab = false;
         }
-    const response = await fetch(`${API}/tasks?completed=${val}&userId=${userId}&deleted=false&started=true&_sort=-createdAt`) 
+    const response = await fetch(`${API}/tasks?completed=${val}&userId=${userId}&deleted=false&started=true&_sort=-createdAt&${fromDate?`createdAt_gte=${fromDate}`:''}${toDate?`&createdAt_lte=${toDate}`:''}`) 
     const data = await response.json()
     console.log(data)
     taskList.replaceChildren();
@@ -282,7 +298,7 @@ async function getNotStartedTask(){
     pendingTaskTab = false;
     allTaskTab = false;
     notStartedTaskTab = true;
-    const response = await fetch(`${API}/tasks?started=false&userId=${userId}&deleted=false&_sort=-createdAt`)
+    const response = await fetch(`${API}/tasks?started=false&userId=${userId}&deleted=false&_sort=-createdAt&${fromDate?`createdAt_gte=${fromDate}`:''}${toDate?`&createdAt_lte=${toDate}`:''}`)
     const data = await response.json();
     console.log(data);
         taskList.replaceChildren();
